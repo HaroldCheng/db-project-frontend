@@ -26,7 +26,17 @@
 export default {
   data() {
     return {
-      userName: "vthsll",
+      userLoginInfo:{
+        //TODO:user's id and password from component_LoginChar
+      },
+      userInfo:{ //user's info object
+        id:'',
+        name:'',
+        tel:'',
+        gender:'',
+        address:''
+      }
+
     };
   },
   created() {
@@ -35,8 +45,9 @@ export default {
   },
   methods:{
    getUserInfo() {
-     const res = this.$axios.get('http://localhost:8080/#/userInfo')//请求地址和参数
-     console.log(res)
+     const res = this.$axios.post('user_info',this.userLoginInfo)//address and parameters
+     //TODO:assign the result to userInfo object
+     this.userInfo=res.data
    }
   }
 };

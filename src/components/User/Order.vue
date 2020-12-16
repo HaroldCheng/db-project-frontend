@@ -47,12 +47,20 @@
 
 <script>
 export default {
+  created() {
+    this.getShopInfo()
+  },
   methods:{
     goDish() {
       this.$router.push("/dish")
     },
     regVIP() {
       this.$message("注册成功！")
+    },
+    getShopInfo() {
+      const res = this.$axios.post('user_info')//address and parameters
+      //TODO:assign the result to userInfo object
+      this.userInfo=res.data
     }
   }
 };

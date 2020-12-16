@@ -5,7 +5,7 @@ import './plugins/element.js'
 import './assets/css/global.css'
 import axios from 'axios'
 Vue.config.productionTip = false
-axios.defaults.baseURL='' //axios的请求根路径
+axios.defaults.baseURL='http://localhost:8080' //axios的请求根路径
 Vue.prototype.$axios=axios
 new Vue({
   router,
