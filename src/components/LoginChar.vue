@@ -195,7 +195,12 @@ export default {
   },
   methods: {
     loginUser() {
-      this.$router.push("/userHome");
+      this.$refs.userRef.validate((valid) => {
+        if (!valid) return false;
+        const res = this.$axios.post("client/",this.userForm); //请求地址和参数
+        console.log(res);
+        this.$router.push("/userHome");
+      });
     },
     resetUser() {
       this.$refs.userRef.resetFields();
