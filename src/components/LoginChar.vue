@@ -197,10 +197,9 @@ export default {
     loginUser() {
       this.$refs.userRef.validate((valid) => {
         if (!valid) return false;
-        // const res = this.$axios.post("login_user",this.userForm)//请求地址和参数
-        // //TODO：校验user的登录是否合理
-        // if(res.meta.status!==200) return this.$message.error("登陆失败")
-        // this.$message.success("登录成功")
+        const res = this.$axios.post("login_user",this.userForm)//请求地址和参数
+        if(res.meta.status!==200) return this.$message.error("登陆失败")
+        this.$message.success("登录成功")
         this.$router.push("/userHome")
       })
     },
