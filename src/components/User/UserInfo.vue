@@ -17,9 +17,9 @@
         <el-table-column label="用户性别" width="150px" prop="gender"> </el-table-column>
         <el-table-column label="用户地址" width="150px" prop="address"> </el-table-column>
       </el-table>
-        <span slot="default">
+          <p>
           <el-button type="primary" round @click="showModifyDia">修改信息</el-button>
-        </span>
+          </p>
       </el-card>
     </div>
     <el-dialog
@@ -28,8 +28,25 @@
         width="50%"
     >
       <p>你可以对以下信息进行修改</p>
+      <el-form :model="modifyUserInfo"  ref="modifyInfoForm" label-width="70px">
+        <el-form-item label="用户编号">
+          <el-input disabled v-model="modifyUserInfo.id"></el-input>
+        </el-form-item>
+        <el-form-item  label="用户名">
+          <el-input v-model="modifyUserInfo.name"></el-input>
+        </el-form-item>
+        <el-form-item label="用户电话">
+          <el-input v-model="modifyUserInfo.tel"></el-input>
+        </el-form-item>
+        <el-form-item label="用户性别">
+          <el-input v-model="modifyUserInfo.gender"></el-input>
+        </el-form-item>
+        <el-form-item label="用户地址">
+          <el-input v-model="modifyUserInfo.address"></el-input>
+        </el-form-item>
+      </el-form>
       <span slot="footer">
-        <el-button type="primary" round @click="modifyDiaVisible=false">确定</el-button>
+        <el-button type="primary" round @click="modifyCheck">确定</el-button>
         <el-button type="info" round @click="modifyDiaVisible=false">取消</el-button>
       </span>
     </el-dialog>
@@ -50,7 +67,9 @@ export default {
         gender:'male',
         address:'123'
       }],
-      modifyDiaVisible:false
+      modifyDiaVisible:false,
+      modifyUserInfo:{ //user's info modified
+      }
 
     };
   },
@@ -66,6 +85,17 @@ export default {
    },
     showModifyDia() {
      this.modifyDiaVisible=true
+      this.modifyUserInfo = this.userInfo[0]
+    },
+    modifyCheck() {
+     // const res = this.$axios.put("user_info",this.modifyUserInfo)
+     //  if(res.mate.state !== 200) {
+     //    return this.$message.error("更新用户信息失败！")
+     //  }
+      console.log("modify check here")
+      this.userInfo[0]=this.modifyUserInfo
+      this.modifyDiaVisible = false
+
     }
   }
 };
