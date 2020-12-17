@@ -10,36 +10,33 @@
     </div>
     <div class="shopTable">
       <el-card>
-        <el-row :gutter="20">
-          <el-col :span="20"
-            ><div>
-              <p>
-                <el-table>
-                  <el-table-column label="店铺编号"></el-table-column>
-                  <el-table-column label="店铺名称"></el-table-column>
-                  <el-table-column label="店铺销量"></el-table-column>
-                </el-table>
-              </p>
-              <el-button type="primary" @click="goDish">查看详情</el-button>
-              <el-button type="success" plain @click="regVIP">注册该商家会员</el-button>
-            </div>
-          </el-col>
-        </el-row>
-        <el-row :gutter="20">
-          <el-col :span="20"
-            ><div>
-              <p>
-                <el-table>
-                  <el-table-column label="店铺编号"></el-table-column>
-                  <el-table-column label="店铺名称"></el-table-column>
-                  <el-table-column label="店铺销量"></el-table-column>
-                </el-table>
-              </p>
-              <el-button type="primary"  @click="goDish">查看详情</el-button>
-              <el-button type="success" plain @click="regVIP">注册该商家会员</el-button>
-            </div>
-          </el-col>
-        </el-row>
+        <div>
+          <el-table :data="shopList">
+            <el-table-column label="店铺编号" prop="id" ></el-table-column>
+                              <el-table-column label="店铺名称" prop="name"></el-table-column>
+                              <el-table-column label="店铺销量" prop="saleNumber"></el-table-column>
+            <el-table-column label="操作">
+              <el-button type="primary" size="small" round @click="goDish">查看详情</el-button>
+              <el-button type="success" size="small" plain round @click="regVIP">注册该商家会员</el-button>
+            </el-table-column>
+
+          </el-table>
+        </div>
+<!--        <el-row :gutter="20" v-for="item in shopList" :key="item.id" :index="item.id+''">-->
+<!--          <el-col :span="20"-->
+<!--            ><div>-->
+<!--              <p>-->
+<!--                <el-table :data="item">-->
+<!--                  <el-table-column label="店铺编号" prop="id"></el-table-column>-->
+<!--                  <el-table-column label="店铺名称" prop="name"></el-table-column>-->
+<!--                  <el-table-column label="店铺销量" prop="saleNumber"></el-table-column>-->
+<!--                </el-table>-->
+<!--              </p>-->
+<!--              <el-button type="primary" @click="goDish">查看详情</el-button>-->
+<!--              <el-button type="success" plain @click="regVIP">注册该商家会员</el-button>-->
+<!--            </div>-->
+<!--          </el-col>-->
+<!--        </el-row>-->
       </el-card>
     </div>
   </div>
@@ -47,6 +44,30 @@
 
 <script>
 export default {
+  data(){
+    return{
+      shopList:[
+        {
+          id:1,
+          name:"shop1",
+          saleNumber:111
+        },{
+        id:2,
+          name:"shop2",
+          saleNumber: 123
+        },{
+          id:3,
+          name:"shop3",
+          saleNumber: 123
+        },{
+          id:4,
+          name:"shop4",
+          saleNumber: 123
+        }
+      ],
+      shopTotal:0
+    }
+  },
   created() {
     this.getShopInfo()
   },
@@ -59,8 +80,12 @@ export default {
     },
     getShopInfo() {
       const res = this.$axios.post('user_info')//address and parameters
-      //TODO:assign the result to userInfo object
-      this.userInfo=res.data
+      if (res.meta.state !== 200){
+        return this.$message.error("获取店铺信息失败！")
+      }
+      //TODO:assign the result to shop list
+      this.shopList = res.data.shop_list
+      this.shopTotal = res.data.shop_total
     }
   }
 };
