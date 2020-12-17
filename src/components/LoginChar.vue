@@ -198,7 +198,8 @@ export default {
       this.$refs.userRef.validate((valid) => {
         if (!valid) return false;
         const res = this.$axios.post("login_user",this.userForm)//请求地址和参数
-        if(res.meta.status!==200) return this.$message.error("登陆失败")
+        //TODO:cancel comment here
+        //if(res.meta.status!==200) return this.$message.error("登陆失败")
         this.$message.success("登录成功")
         this.$router.push("/userHome")
       })

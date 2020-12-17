@@ -66,3 +66,53 @@ res:{
 }
 ```
 
+**店铺列表**
+
+请求地址：shop_list
+
+店铺信息格式：
+
+```js
+res:{
+    data:{
+        shop_list:[ //对象数组
+            {
+                id:1,
+                name:"shop1",
+                sale_number:100
+            },
+            {
+                id:2,
+                name:"shop2",
+                sale_number:10000
+            }
+        ],
+            shop_total:10000 //店铺总量
+    },
+      meta:{ //状态信息
+            msg:"信息传递成功",
+                status:200 //500表示失败
+        }
+}
+```
+
+**用户VIP注册**
+
+请求地址：vip_list
+
+请求参数：vipID
+
+响应信息格式：
+
+```js
+res{
+data:xxx,//这里不需要响应数据，返回响应信息就可以
+meta:{
+msg:"注册成功！",
+status:200
+}
+}
+```
+
+
+

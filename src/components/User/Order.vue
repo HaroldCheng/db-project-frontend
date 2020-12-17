@@ -16,8 +16,10 @@
                               <el-table-column label="店铺名称" prop="name"></el-table-column>
                               <el-table-column label="店铺销量" prop="saleNumber"></el-table-column>
             <el-table-column label="操作">
-              <el-button type="primary" size="small" round @click="goDish">查看详情</el-button>
-              <el-button type="success" size="small" plain round @click="regVIP">注册该商家会员</el-button>
+              <template slot-scope="scope">
+                <el-button type="primary" size="small" round @click="goDish">查看详情</el-button>
+                <el-button type="success" size="small" plain round @click="regVIP(scope.row.id)">注册该商家会员</el-button>
+              </template>
             </el-table-column>
 
           </el-table>
@@ -75,11 +77,15 @@ export default {
     goDish() {
       this.$router.push("/dish")
     },
-    regVIP() {
-      this.$message("注册成功！")
+    regVIP(vipID) {
+      const res = this.$axios.post('vip_list',vipID)
+      if (res.meta.state !== 200){
+        return this.$message.error("注册失败！")
+      }
+      this.$message.success("注册成功！")
     },
     getShopInfo() {
-      const res = this.$axios.post('user_info')//address and parameters
+      const res = this.$axios.get('shop_list')//address and parameters
       if (res.meta.state !== 200){
         return this.$message.error("获取店铺信息失败！")
       }
