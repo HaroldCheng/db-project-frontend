@@ -40,8 +40,6 @@
 export default {
   data(){
     return{
-      btnMsg1:"加入订单",
-      btnMsg2:"已加入订单",
       shopId:0,
       dishList:[{
         id:1,

@@ -11,19 +11,10 @@
     </div>
     <div class="infoTable">
       <el-card>
-        <!--      <el-table :data="userInfo">-->
-        <!--        <el-table-column label="用户编号" width="150px" prop="id">-->
-        <!--        </el-table-column>-->
-        <!--        <el-table-column label="用户姓名" width="150px" prop="name">-->
-        <!--        </el-table-column>-->
-        <!--        <el-table-column label="用户电话" width="150px" prop="tel"> </el-table-column>-->
-        <!--        <el-table-column label="用户性别" width="150px" prop="gender"> </el-table-column>-->
-        <!--        <el-table-column label="用户地址" width="150px" prop="address"> </el-table-column>-->
-        <!--      </el-table>-->
         <el-row :gutter="20">
           <el-col :span="8">
             <h3>用户编号</h3>
-            <span>{{ userInfo.id }}</span>
+            <span>{{userInfo.id}}</span>
           </el-col>
           <el-col :span="8">
             <h3>用户姓名</h3>
@@ -39,7 +30,17 @@
             <h3>用户性别</h3>
             <span>{{ userInfo.gender }}</span>
           </el-col>
-          <el-col :span="16">
+          <el-col :span="8">
+            <h3>用户年龄</h3>
+            <span>{{ userInfo.age}}</span>
+          </el-col>
+          <el-col :span="8">
+            <h3>总消费</h3>
+            <span>{{ userInfo.out }}</span>
+          </el-col>
+        </el-row>
+        <el-row :gutter="20">
+          <el-col :span="8">
             <h3>用户地址</h3>
             <span>{{ userInfo.address }}</span>
           </el-col>
@@ -63,14 +64,17 @@
         <el-form-item label="用户名">
           <el-input v-model="modifyUserInfo.name"></el-input>
         </el-form-item>
-        <el-form-item label="用户电话">
-          <el-input v-model="modifyUserInfo.tel"></el-input>
-        </el-form-item>
         <el-form-item label="用户性别">
           <el-input v-model="modifyUserInfo.gender"></el-input>
         </el-form-item>
+        <el-form-item label="用户年龄">
+          <el-input v-model="modifyUserInfo.age"></el-input>
+        </el-form-item>
+        <el-form-item label="用户电话">
+          <el-input v-model="modifyUserInfo.tel"></el-input>
+        </el-form-item>
         <el-form-item label="用户地址">
-          <el-input v-model="modifyUserInfo.address"></el-input>
+          <el-input v-model="modifyUserInfo.addr"></el-input>
         </el-form-item>
       </el-form>
       <span slot="footer">
@@ -97,19 +101,24 @@ export default {
         //TODO:user's id and password from component_LoginChar
       },
       userInfo: { //user's info object
-        id: 1,
-        name: 'zhl',
-        tel: '18813097336',
-        gender: 'male',
-        address: '123'
+        id: 0,
+        name: "",
+        age:12,
+        addr: "",
+        tel: "",
+        gender: "",
+        out:0,
       },
       modifyDiaVisible: false,
       modifyUserInfo: { //user's info modified
         id: 0,
         name: "",
+        age:12,
+        addr: "",
         tel: "",
         gender: "",
-        address: ""
+        out:0,
+
       },
       modifyFormRules: {
         newName: [
@@ -145,14 +154,13 @@ export default {
     this.getUserInfo()
   },
   methods: {
-    getUserInfo() {
-      const res = this.$axios.get('user_info', this.userLoginInfo)//address and parameters
-      //TODO:cancel comment here
-      // if(res.meta.status !== 200) {
-      //   return this.$message.error("获取用户信息失败！")
-      // }
-      //assign the result to userInfo object
-      this.userInfo = res.data.userInfo
+    async getUserInfo() { //Transfer checked,done
+      const {data:res} = await this.$axios.post('client/get_info/', this.userLoginInfo)//address and parameters
+      if (res.status !== 200) {
+        return this.$message.error("获取用户信息失败！")
+      }
+      this.$message.success("获取用户信息成功！")
+      this.userInfo = res.data.user_info
     },
     showModifyDia() {
       this.modifyDiaVisible = true
@@ -160,26 +168,27 @@ export default {
       this.modifyUserInfo.name = this.userInfo.name
       this.modifyUserInfo.tel = this.userInfo.tel
       this.modifyUserInfo.gender = this.userInfo.gender
-      this.modifyUserInfo.address = this.userInfo.address
+      this.modifyUserInfo.addr = this.userInfo.address
+      this.modifyUserInfo.age = this.userInfo.age
+      this.modifyUserInfo.out = this.userInfo.out
     },
     modifyUserInfoClosed() {
       this.$refs.modifyInfoFormRef.resetFields()
     },
-    modifyCheck() {
+    async modifyCheck() {
       //TODO:表单预验证
       /*1. validation预验证
       * 2. 向后端发送修改请求
       * 3. 修改成功后，更新当前userInfo信息*/
-      // const res = this.$axios.put("user_info",this.modifyUserInfo)
-      //  if(res.mate.state !== 200) {
-      //    return this.$message.error("更新用户信息失败！")
-      //  }
-      console.log("modify check here")
+      const {data:res} = await this.$axios.post("client/edit_info/",this.modifyUserInfo)
+      if(res.status !== 200){
+        return this.$message.error("修改失败")
+      }
       this.userInfo = this.modifyUserInfo
+      this.$message.success("修改成功")
       this.modifyDiaVisible = false
     },
     modifyCancel() {
-      console.log("modify cancel here")
       this.modifyDiaVisible = false
     }
   }
