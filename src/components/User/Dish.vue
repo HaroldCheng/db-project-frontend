@@ -13,26 +13,24 @@
     </div>
     <div class="dishTable">
       <el-card>
-        <el-row :gutter="20">
-          <el-col :span="12">
-              <p>
-            <el-table>
-              <el-table-column label="菜品名称"></el-table-column>
-              <el-table-column label="菜品单价"></el-table-column>
+            <el-table :data="dishList">
+              <el-table-column label="#" prop="id"></el-table-column>
+              <el-table-column label="菜品名称" prop="name"></el-table-column>
+              <el-table-column label="菜品单价" prop="price"></el-table-column>
+              <el-table-column label="数量">
+                <template slot-scope="scope">
+                  <el-input-number v-model="scope.row.number" :min="1" size="mini"></el-input-number>
+                </template>
+              </el-table-column>
+              <el-table-column label="操作">
+                <template slot-scope="scope">
+                  <el-button type="primary" plain @click="add2order(scope.row.id)">加入订单</el-button>
+                </template>
+              </el-table-column>
             </el-table>
-              </p>
-            <el-button type="primary" plain @click="add2order">加入订单</el-button>
-          </el-col>
-          <el-col :span="12">
-              <p>
-            <el-table>
-              <el-table-column label="菜品名称"></el-table-column>
-              <el-table-column label="菜品单价"></el-table-column>
-            </el-table>
-              </p>
-            <el-button type="primary" plain @click="add2order">加入订单</el-button>
-          </el-col>
-        </el-row>
+        <p>
+          <el-button type="primary" round @click="finishOrder">下单</el-button>
+        </p>
       </el-card>
     </div>
   </div>
@@ -43,10 +41,51 @@ export default {
   data(){
     return{
       btnMsg1:"加入订单",
-      btnMsg2:"已加入订单"
+      btnMsg2:"已加入订单",
+      shopId:0,
+      dishList:[{
+        id:1,
+        name:"小鸡儿炖菌子不要小鸡儿",
+        price:25,
+        number:0
+      },
+        {
+          id:2,
+          name:"冀晓青炒青小鸡儿",
+          price:-10,
+          number:0
+        }],
+      orderList:[{
+        id:0,
+        number:0
+      }
+      ]
     }
   },
+  created() {
+    this.getDishList()
+  },
   methods:{
+    getDishList(){
+      const res = this.$axios.get("dish_list",this.shopId)
+      if(res.meta.status!==200){
+        return this.$message.error("获取菜品信息失败！")
+      }
+      this.$message.success("获取菜品信息成功！")
+      this.dishList = res.data.dish_list
+    },
+    add2order(dishID){
+      console.log(dishID)
+      this.orderList.push(dishID)
+      console.log(this.orderList)
+    },
+    finishOrder() {
+      const res = this.$axios.post("order_content",this.orderList)
+      if(res.mate.status!==200) {
+        return this.$message.error("下单失败")
+      }
+      this.$message.success("成功")
+    }
   }
 };
 </script>

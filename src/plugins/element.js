@@ -4,7 +4,7 @@ import { Button, Form, FormItem, Input, Message, Container, Header,
   BreadcrumbItem, Card, Row, Col, Table, TableColumn, Switch, Tooltip, Pagination,
   Dialog, MessageBox, Tag, Tree, Select, Option, Cascader, Alert, Tabs, TabPane,
   Step, Steps, Checkbox, CheckboxGroup, Upload,
-  Timeline, TimelineItem ,Icon,Collapse,CollapseItem,PageHeader} from 'element-ui'
+  Timeline, TimelineItem ,Icon,Collapse,CollapseItem,PageHeader,InputNumber} from 'element-ui'
 
 Vue.use(Button)
 Vue.use(Form)
@@ -51,3 +51,4 @@ Vue.use(Icon)
 Vue.use(Collapse)
 Vue.use(CollapseItem)
 Vue.use(PageHeader)
+Vue.use(InputNumber)
