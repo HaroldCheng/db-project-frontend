@@ -17,9 +17,9 @@
             <i class="el-icon-user-solid"></i>
             <span class="info">客户基本信息</span>
           </el-menu-item>
-          <el-menu-item class="orderMenu" index="order" @click="saveNavState('order')">
+          <el-menu-item class="orderMenu" index="platChoose" @click="saveNavState('platChoose')">
             <i class="el-icon-fork-spoon"></i>
-            <span class="order">发起订单</span>
+            <span class="platChoose">发起订单</span>
           </el-menu-item>
           <el-menu-item class="historyMenu" index="history" @click="saveNavState('history')">
             <i class="el-icon-time"></i>
@@ -90,7 +90,7 @@ export default {
   }
 }
 .info,
-.order,
+.platChoose,
 .history,
 .money {
   font-size: 16px;

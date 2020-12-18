@@ -8,17 +8,24 @@
         <el-breadcrumb-item>商铺列表</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
+    <h2 class="title">欢迎来到饿没饿平台</h2>
     <div class="shopTable">
       <el-card>
         <div>
           <el-table :data="shopList">
-            <el-table-column label="店铺编号" prop="id" ></el-table-column>
-                              <el-table-column label="店铺名称" prop="name"></el-table-column>
-                              <el-table-column label="店铺销量" prop="saleNumber"></el-table-column>
-            <el-table-column label="操作">
+            <el-table-column label="店铺编号" prop="id" width="80px" align="center"></el-table-column>
+                              <el-table-column label="店铺名称" prop="name" align="center" width="300px"></el-table-column>
+                              <el-table-column label="店铺销量" prop="saleNumber" width="100px" align="center"></el-table-column>
+            <el-table-column label="店铺星级" prop="star" width="80px" align="center"></el-table-column>
+            <el-table-column label="操作" align="center">
               <template slot-scope="scope">
                 <el-button type="primary" size="small" round @click="chooseDish(scope.row.id)">查看详情</el-button>
-                <el-button type="success" size="small" plain round @click="regVIP(scope.row.id)">注册该商家会员</el-button>
+                <el-button type="success" size="small" plain round @click="regVIP(scope.row.id)" v-if="scope.row.isVip===false">
+                  注册该商家会员
+                </el-button>
+                <el-button type="success" size="small" plain round @click="regVIP(scope.row.id)" v-if="scope.row.isVip==true" disabled>
+                  已是该商家会员
+                </el-button>
               </template>
             </el-table-column>
           </el-table>
@@ -32,29 +39,35 @@
 export default {
   data(){
     return{
+      platId:2,
+      userId:3,
       shopList:[
         {
           id:1,
           name:"shop1",
-          saleNumber:111
-        },{
-        id:2,
-          name:"shop2",
-          saleNumber: 123
-        },{
+          saleNumber:111,
+          star:5,
+          isVip:false
+        },
+        {
+          id:2,
+          name:"shop1",
+          saleNumber:111,
+          star:5,
+          isVip:true
+        },
+        {
           id:3,
-          name:"shop3",
-          saleNumber: 123
-        },{
-          id:4,
-          name:"shop4",
-          saleNumber: 123
+          name:"shop1",
+          saleNumber:111,
+          star:5,
+          isVip:false
         }
       ]
     }
   },
   created() {
-    this.getShopInfo()
+    //this.getShopList()
   },
   methods:{
     chooseDish(shopID) {
@@ -67,8 +80,8 @@ export default {
       }
       this.$message.success("注册成功！")
     },
-    async getShopInfo() {
-      const {data:res} = await this.$axios.post('shop/shop_list/')//address and parameters
+    async getShopList() {
+      const {data:res} = await this.$axios.post('shop/shop_list/',[this.platId,this.userId])//address and parameters
       if (res.status !== 200){
         return this.$message.error("获取店铺信息失败！")
       }
@@ -84,6 +97,10 @@ export default {
 .shopTable {
   margin-left: 40px;
   margin-top: 40px;
-  width: 80%;
+  width: 90%;
+}
+.title{
+  margin-left: 40px;
+  margin-top: 20px;
 }
 </style>

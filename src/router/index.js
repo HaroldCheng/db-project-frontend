@@ -11,6 +11,8 @@ const History = () => import('../components/User/History.vue')
 const Order = () => import('../components/User/Order.vue')
 const Money = () => import('../components/User/Money.vue')
 const Dish = () => import('../components/User/Dish.vue')
+const PlatChoose = () => import('../components/User/PlatChoose.vue')
+const OrderMT = () => import('../components/User/OrderMT.vue')
 Vue.use(VueRouter)
 
 const routes = [
@@ -22,10 +24,12 @@ const routes = [
   children:[
       {path:'/userWel',component:UserWel},
       {path:'/userInfo',component:UserInfo},
-      {path:'/order',component:Order},
+      {path:'/platChoose',component:PlatChoose},
       {path:'/history',component:History},
       {path:'/money',component:Money},
-      {path:'/dish',component:Dish}
+      {path:'/dish',component:Dish},
+      {path:'/order',component:Order},
+      {path:'/orderMt',component:OrderMT}
   ]
   },
   {path:'/riderHome',component:RiderHome},
