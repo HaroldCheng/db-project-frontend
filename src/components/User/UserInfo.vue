@@ -42,7 +42,7 @@
         <el-row :gutter="20">
           <el-col :span="8">
             <h3>用户地址</h3>
-            <span>{{ userInfo.address }}</span>
+            <span>{{ userInfo.addr}}</span>
           </el-col>
         </el-row>
         <p>
@@ -99,6 +99,8 @@ export default {
     return {
       userLoginInfo: {
         //TODO:user's id and password from component_LoginChar
+        id:3,
+        password:"sjknb"
       },
       userInfo: { //user's info object
         id: 0,
@@ -118,7 +120,6 @@ export default {
         tel: "",
         gender: "",
         out:0,
-
       },
       modifyFormRules: {
         newName: [
@@ -168,7 +169,7 @@ export default {
       this.modifyUserInfo.name = this.userInfo.name
       this.modifyUserInfo.tel = this.userInfo.tel
       this.modifyUserInfo.gender = this.userInfo.gender
-      this.modifyUserInfo.addr = this.userInfo.address
+      this.modifyUserInfo.addr = this.userInfo.addr
       this.modifyUserInfo.age = this.userInfo.age
       this.modifyUserInfo.out = this.userInfo.out
     },

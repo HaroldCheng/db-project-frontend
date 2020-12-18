@@ -64,9 +64,9 @@ export default {
     this.getDishList()
   },
   methods:{
-    getDishList(){
-      const res = this.$axios.get("dish_list",this.shopId)
-      if(res.meta.status!==200){
+    async getDishList(){
+      const {data:res} = await this.$axios.get("dish_list",this.shopId)
+      if(res.status!==200){
         return this.$message.error("获取菜品信息失败！")
       }
       this.$message.success("获取菜品信息成功！")
@@ -77,12 +77,12 @@ export default {
       this.orderList.push(dishID)
       console.log(this.orderList)
     },
-    finishOrder() {
-      const res = this.$axios.post("order_content",this.orderList)
-      if(res.mate.status!==200) {
-        return this.$message.error("下单失败")
+    async finishOrder() {
+      const {data:res} = await this.$axios.post("order_content",this.orderList)
+      if(res.status!==200) {
+        return this.$message.error("下单失败！")
       }
-      this.$message.success("成功")
+      this.$message.success("下单成功！")
     }
   }
 };
