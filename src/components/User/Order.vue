@@ -5,6 +5,7 @@
         <el-breadcrumb-item :to="{ path: '/userHome' }"
           >用户主页</el-breadcrumb-item
         >
+        <el-breadcrumb-item :to="{path:'/platChoose'}">选择平台</el-breadcrumb-item>
         <el-breadcrumb-item>商铺列表</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
@@ -20,10 +21,10 @@
             <el-table-column label="操作" align="center">
               <template slot-scope="scope">
                 <el-button type="primary" size="small" round @click="chooseDish(scope.row.id)">查看详情</el-button>
-                <el-button type="success" size="small" plain round @click="regVIP(scope.row.id)" v-if="scope.row.isVip===false">
+                <el-button type="success" size="small" plain round @click="regVIP(scope.row.id)" v-if="scope.row.vip===false">
                   注册该商家会员
                 </el-button>
-                <el-button type="success" size="small" plain round @click="regVIP(scope.row.id)" v-if="scope.row.isVip==true" disabled>
+                <el-button type="info" size="small" plain round v-if="scope.row.vip===true" disabled>
                   已是该商家会员
                 </el-button>
               </template>
@@ -47,21 +48,7 @@ export default {
           name:"shop1",
           saleNumber:111,
           star:5,
-          isVip:false
-        },
-        {
-          id:2,
-          name:"shop1",
-          saleNumber:111,
-          star:5,
-          isVip:true
-        },
-        {
-          id:3,
-          name:"shop1",
-          saleNumber:111,
-          star:5,
-          isVip:false
+          vip:false
         }
       ]
     }
@@ -73,15 +60,17 @@ export default {
     chooseDish(shopID) {
       this.$router.push("/dish")
     },
-    async regVIP(vipID) {
-      const {data:res} = await this.$axios.post('shop/vip_list/',vipID)
-      if (res.status !== 200){
-        return this.$message.error("注册失败！")
-      }
+    async regVIP(shopId) {
+      // const {data:res} = await this.$axios.post('client/vip_list/',[shopId,this.userId])
+      // if (res.status !== 200){
+      //   return this.$message.error("注册失败！")
+      // }
       this.$message.success("注册成功！")
+      //TODO:modify vip btns
+      this.shopList[0].vip = true
     },
     async getShopList() {
-      const {data:res} = await this.$axios.post('shop/shop_list/',[this.platId,this.userId])//address and parameters
+      const {data:res} = await this.$axios.post('client/shop_list/',[this.platId,this.userId])//address and parameters
       if (res.status !== 200){
         return this.$message.error("获取店铺信息失败！")
       }

@@ -1,13 +1,12 @@
 <template>
   <div>
     <div>
-      <el-breadcrumb separator-class="el-icon-arrow-right">
-        <el-breadcrumb-item :to="{ path: '/userHome' }"
+        <el-breadcrumb separator-class="el-icon-arrow-right">
+          <el-breadcrumb-item :to="{ path: '/userHome' }"
           >用户主页</el-breadcrumb-item
-        >
-        <el-breadcrumb-item :to="{ path: '/order' }"
-          >商铺列表</el-breadcrumb-item
-        >
+          >
+          <el-breadcrumb-item :to="{path:'/platChoose'}">选择平台</el-breadcrumb-item>
+          <el-breadcrumb-item :to="{path:'/order'}">商铺列表</el-breadcrumb-item>
         <el-breadcrumb-item>商家菜品</el-breadcrumb-item>
       </el-breadcrumb>
     </div>

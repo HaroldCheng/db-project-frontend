@@ -1,5 +1,13 @@
 <template>
 <div>
+  <div>
+    <el-breadcrumb separator-class="el-icon-arrow-right">
+      <el-breadcrumb-item :to="{ path: '/userHome' }"
+      >用户主页</el-breadcrumb-item
+      >
+      <el-breadcrumb-item>选择平台</el-breadcrumb-item>
+    </el-breadcrumb>
+  </div>
   <h2>我们是一个多平台的外卖系统，请选择你想要的平台</h2>
   <el-row :gutter="10">
     <el-col span="12">
