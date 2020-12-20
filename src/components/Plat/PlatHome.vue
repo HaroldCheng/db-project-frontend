@@ -2,7 +2,7 @@
 <el-container class="userHomeContainer">
   <el-header>
     <div>
-      <span>欢迎你，美团董事长 {{msg}}</span>
+      <span>多平台外卖系统</span>
     </div>
     <el-button class="logout_button" type="info" @click="logout">退出</el-button>
   </el-header>
@@ -49,7 +49,7 @@
 export default {
   data(){
     return{
-      msg:'郑海林',
+      msg:'',
     }
   },
   methods:{
