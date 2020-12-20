@@ -7,30 +7,40 @@
     <el-button class="logout_button" type="info" @click="logout">退出</el-button>
   </el-header>
   <el-container class="aside_main">
-    <el-aside width="300px">
-<el-menu
-      class="aside_menu"
-      background-color="#ffc300"
-      text-color="#fff"
-      active-text-color="black">
-      <el-menu-item index="1" class="aside_menu1">
-        <span>平台基本信息</span>
-      </el-menu-item>
-      <el-menu-item index="2" class="aside_menu2">
-        <span>平台商家</span>
-      </el-menu-item>
-      <el-menu-item index="3" class="aside_menu3">
-        <span>平台客户</span>
-      </el-menu-item>
-      <el-menu-item index="4" class="aside_menu4">
-        <span>平台骑手</span>
-      </el-menu-item>
-            <el-menu-item index="5" class="aside_menu5">
-        <span>平台财务情况</span>
-      </el-menu-item>
-    </el-menu>
-    </el-aside>
-    <el-main>还没写</el-main>
+      <el-aside width="300px">
+          <el-menu class="aside_menu"
+                   background-color="#ffc300"
+                   text-color="#fff"
+                   active-text-color="black"
+                   :router="true"
+                   :default-active="activePath">
+
+              <el-menu-item index="platInfo" class="aside_menu1" @click="saveNavState('platInfo')">
+                  <span>平台基本信息</span>
+              </el-menu-item>
+              <el-menu-item index="platShop" class="aside_menu2" @click="saveNavState('platShop')">
+                  <span>平台商家</span>
+              </el-menu-item>
+              <el-menu-item index="platUser" class="aside_menu3" @click="saveNavState('platUser')">
+                  <span>平台客户</span>
+              </el-menu-item>
+              <el-menu-item index="platRider" class="aside_menu4" @click="saveNavState('platRider')">
+                  <span>平台骑手</span>
+              </el-menu-item>
+              <el-menu-item index="platIncome" class="aside_menu5" @click="saveNavState('platIncome')">
+                  <span>平台财务情况</span>
+              </el-menu-item>
+          </el-menu>
+          <div class="author">
+              <p>北航数据库大作业</p>
+              <p>郑海林 18373388</p>
+              <p>王铉茜 18373743</p>
+              <p>陈哲琦 18182602</p>
+          </div>
+      </el-aside>
+    <el-main>
+        <router-view></router-view>
+    </el-main>
   </el-container>
 </el-container>
 </template>
@@ -81,14 +91,22 @@ export default {
             font-size: 20px;
             line-height: 30px;
   }
-  
-  .el-aside {
-    background-color:rgb(255, 195, 0);
-    color: rgb(255, 195, 0);
-    text-align: center;
-    float: left;
-    height: 100%;
-  }
+
+    .el-aside {
+        background-color: rgb(255, 195, 0);
+        color: rgb(255, 195, 0);
+        text-align: center;
+        float: left;
+        height: 100%;
+        .author
+
+    {
+        color: #fff;
+        position: absolute;
+        bottom: 0px;
+        left: 50px;
+    }
+    }
   .aside_menu{
     height: 100%;
     .aside_menu1{
@@ -107,16 +125,15 @@ export default {
       margin-top: 20px;
       font-size: 20px;
     }
-        .aside_menu5{
+    .aside_menu5{
       margin-top: 20px;
       font-size: 20px;
     }
   }
   
   .el-main {
-    background-color: #E9EEF3;
+    background-color: #FFFFFF;
     color: #333;
-    text-align: center;
     height: 100%;
   }
   

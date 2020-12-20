@@ -39,6 +39,8 @@
 export default {
   data(){
     return{
+      platId:0,
+      userId:0,
       shopId:0,
       dishList:[{
         id:1,
@@ -77,7 +79,8 @@ export default {
       console.log(this.orderList)
     },
     async finishOrder() {
-      const {data:res} = await this.$axios.post("order_content",this.orderList)
+      //TODO: modify the para to backend
+      const {data:res} = await this.$axios.post("order_content",[this.platId,this.userId,this.shopId,this.orderList])
       if(res.status!==200) {
         return this.$message.error("下单失败！")
       }
