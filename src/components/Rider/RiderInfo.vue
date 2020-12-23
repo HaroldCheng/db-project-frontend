@@ -65,7 +65,7 @@
             <el-input v-model="modifyRiderInfo.tel"></el-input>
           </el-form-item>
           <el-form-item label="骑手星级">
-            <el-input v-model="modifyRiderInfo.perf"></el-input>
+            <el-input v-model="modifyRiderInfo.perf" disabled></el-input>
           </el-form-item>
         </el-form>
         <span slot="footer">
@@ -81,15 +81,23 @@ export default {
   data() {
     return {
       riderLoginInfo:{
-        id:12,
-        password:'sjkszdnb'
+        id:5,
+        password:'sjknb'
       },
       riderInfo:{
-
+        id:1,
+        name:'',
+        gender:'',
+        tel:12,
+        perf:2
       },
       modifyDiaVisible:false,
       modifyRiderInfo:{
-        
+        id:1,
+        name:'',
+        gender:'',
+        tel:12,
+        perf:2
       },
       modifyFormRules:{ //TODO: sub important
         
@@ -114,9 +122,8 @@ export default {
       this.modifyRiderInfo.name = this.riderInfo.name
       this.modifyRiderInfo.tel = this.riderInfo.tel
       this.modifyRiderInfo.gender = this.riderInfo.gender
-      this.modifyRiderInfo.addr = this.riderInfo.addr
       this.modifyRiderInfo.age = this.riderInfo.age
-      this.modifyRiderInfo.out = this.riderInfo.out
+      this.modifyRiderInfo.perf = this.riderInfo.perf
     },
     modifyRiderInfoClosed() {
       this.$refs.modifyInfoFormRef.resetFields()

@@ -21,7 +21,6 @@
                   <template slot-scope="scope">
                     <el-button type="primary" size="small" round v-if="scope.row.picked===false" @click="pickOrder(scope.index)">接单</el-button>
                     <el-button type="primary" size="small" round v-if="scope.row.picked===true" disabled>已接单</el-button>
-
                   </template>
                 </el-table-column>
               </el-table>
@@ -45,19 +44,16 @@ export default {
             shopTel:'119',
             picked:false
           }
-        ],
-      pickedSet:[
-
-      ]
+        ]
     }
   },
 methods:{
   goBack() {
     this.$router.push('/riderHome')
   },
-  pickOrder(index) {
+  pickOrder:async function(index) {
     this.orderSet[index].picked = true
-    this.pickedSet.push(this.orderSet[index].id)
+    const {data:res} = this.$axios.post()
   }
 }
 }
