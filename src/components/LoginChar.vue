@@ -31,6 +31,7 @@
               placeholder="密码"
               prefix-icon="el-icon-lock"
               v-model="userForm.pass"
+              type="password"
             ></el-input>
           </el-form-item>
           <el-form-item class="btns">
@@ -67,6 +68,7 @@
               placeholder="密码"
               prefix-icon="el-icon-lock"
               v-model="riderForm.pass"
+              type="password"
             ></el-input>
           </el-form-item>
           <el-form-item class="btns">
@@ -103,6 +105,7 @@
               placeholder="密码"
               prefix-icon="el-icon-lock"
               v-model="platForm.pass"
+              type="password"
             ></el-input>
           </el-form-item>
           <el-form-item class="btns">
@@ -139,6 +142,7 @@
               placeholder="密码"
               prefix-icon="el-icon-lock"
               v-model="shopForm.pass"
+              type="password"
             ></el-input>
           </el-form-item>
           <el-form-item class="btns">
@@ -197,10 +201,9 @@ export default {
     loginUser() {
       this.$refs.userRef.validate((valid) => {
         if (!valid) return false;
-        const res = this.$axios.post("login_user",this.userForm)//请求地址和参数
-        //TODO:cancel comment here
-        //if(res.meta.status!==200) return this.$message.error("登陆失败")
-        this.$message.success("登录成功")
+        // const {data:res} = this.$axios.post("login_user/",this.userForm)//请求地址和参数
+        // if(res.status!==200) return this.$message.error("登陆失败")
+        // this.$message.success("登录成功")
         this.$router.push("/userHome")
       })
     },
@@ -208,19 +211,38 @@ export default {
       this.$refs.userRef.resetFields();
     },
     loginRider() {
-      this.$router.push("/riderHome");
+      this.$refs.riderRef.validate((valid)=>{
+        if(!valid) return false
+        // const {data:res} = this.$axios.post("login_rider/",this.riderForm)
+        // if(res.status!== 200) return this.$message.error("登陆失败")
+        // this.$message.success("登录成功")
+        this.$router.push("/riderHome")
+      })
+
     },
     resetRider() {
       this.$refs.riderRef.resetFields();
     },
     loginPlat() {
-      this.$router.push("/platHome");
+      this.$refs.platRef.validate((valid)=>{
+        if(!valid) return false
+        // const {data:res} = this.$axios.post("login_plat/",this.platForm)
+        // if(res.status!== 200) return this.$message.error("登陆失败")
+        // this.$message.success("登录成功")
+        this.$router.push("/platHome");
+      })
     },
     resetPlat() {
       this.$refs.platRef.resetFields();
     },
     loginShop() {
-      this.$router.push("/shopHome");
+      this.$refs.shopRef.validate((valid)=>{
+        if(!valid) return false
+        // const {data:res} = this.$axios.post("login_shop/",this.shopForm)
+        // if(res.status!== 200) return this.$message.error("登陆失败")
+        // this.$message.success("登录成功")
+        this.$router.push("/shopHome");
+      })
     },
     resetShop() {
       this.$refs.shopRef.resetFields();

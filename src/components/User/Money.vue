@@ -32,15 +32,14 @@ export default {
     }
   },
  async mounted() {
-    var myChart = echarts.init(document.getElementById('main'))
-    //TODO:获取用户的消费情况
+    const myChart = echarts.init(document.getElementById('main'))
     const {data:res} = await this.$axios.post("client/money_info/",[this.platId,this.userId])
     if(res.status !== 200) {
       return this.$message.error("获取消费信息失败！")
     }
     this.$message.success("获取消费信息成功！")
     this.moneyInfo = res.data.money_info
-    var option = {
+    const option = {
       series: {
         type: 'pie',
         data: this.moneyInfo

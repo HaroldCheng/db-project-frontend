@@ -33,6 +33,16 @@
         </p>
       </el-card>
     </div>
+<!--    <div class="orderList">-->
+<!--      <el-card>-->
+<!--        <h2>订单内容</h2>-->
+<!--        <el-table :data="orderList">-->
+<!--          <el-table-column label="菜品名称" prop="name"></el-table-column>-->
+<!--          <el-table-column label="菜品数量" prop="number"></el-table-column>-->
+<!--        </el-table>-->
+<!--        <h2>{{totalCost}}</h2>-->
+<!--      </el-card>-->
+<!--    </div>-->
   </div>
 </template>
 
@@ -73,16 +83,14 @@ export default {
       this.$message.success("获取菜品信息成功！")
       this.dishList = res.data.dish_list
     },
-    //TODO:modify this
     add2order(dishID,dishNumber){
       this.orderList.push({
         dishID,
         dishNumber
       })
-      console.log(this.orderList)
+      this.$message.success("加入订单成功！")
     },
     async finishOrder() {
-      //TODO: modify the para to backend
       const {data:res} = await this.$axios.post("client/order_content/",[this.platId,this.userId,this.shopId,this.orderList])
       if(res.status!==200) {
         return this.$message.error("下单失败！")
@@ -90,13 +98,18 @@ export default {
       this.$message.success("下单成功！")
     }
   }
-};
+}
 </script>
 
 <style lang="less" scoped>
 .dishTable {
   margin-left: 40px;
   margin-top: 40px;
+  width: 80%;
+}
+.orderList{
+  margin-top: 50px;
+  margin-left: 40px;
   width: 80%;
 }
 </style>

@@ -8,22 +8,13 @@
   </el-header>
   <el-container class="aside_main">
       <el-aside width="300px">
-          <el-menu unique-opened :collapse="isCollapse" :collapse-transition="false" router :default-active="activePath" background-color="#333744" text-color="#fff" active-text-color="#409FFF">
-              <!-- :unique-opened="true"->只允许展开一个菜单 -->
-              <!-- :collapse-transition="false" -> 关闭动画 -->
-              <!-- router -> 导航开启路由模式 -->
-              <!-- 一级菜单  -->
+          <el-menu unique-opened :collapse="isCollapse" :collapse-transition="false" router :default-active="activePath" background-color="#87cefa" text-color="#fff" active-text-color="black">
               <el-submenu :index="item.id+''" v-for="item in menuList" :key="item.id">
-                  <!-- 一级菜单的模板区域 -->
                   <template slot="title">
                       <i :class="iconObj[item.id]"></i>
                       <span>{{ item.authName}}</span>
                   </template>
-                  <!-- 二级菜单 -->
                   <el-menu-item :index="'/' + subItem.path" v-for="subItem in item.children" :key="subItem.id" @click="saveNavState('/' + subItem.path)">
-                      <!-- 导航开启路由模式：
-                将index值作为导航路由 -->
-                      <!-- 二级菜单的模板区域 -->
                       <template slot="title">
                           <i class="el-icon-menu"></i>
                           <span>{{ subItem.authName}}</span>
