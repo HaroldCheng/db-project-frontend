@@ -31,10 +31,6 @@
                       <h3>骑手年龄</h3>
                       <span>{{ riderInfo.age}}</span>
                     </el-col>
-                    <el-col :span="8">
-                      <h3>骑手星级</h3>
-                      <span>{{ riderInfo.perf }}</span>
-                    </el-col>
                   </el-row>
                   <p>
                     <el-button type="primary" round @click="showModifyDia()">修改信息</el-button>
@@ -64,9 +60,6 @@
           <el-form-item label="骑手电话">
             <el-input v-model="modifyRiderInfo.tel"></el-input>
           </el-form-item>
-          <el-form-item label="骑手星级">
-            <el-input v-model="modifyRiderInfo.perf" disabled></el-input>
-          </el-form-item>
         </el-form>
         <span slot="footer">
         <el-button type="primary" round @click="modifyCheck">确定</el-button>
@@ -86,18 +79,18 @@ export default {
       },
       riderInfo:{
         id:1,
-        name:'',
-        gender:'',
-        tel:12,
-        perf:2
+        name:'zhlsb',
+        gender:'male',
+        age:20,
+        tel:12
       },
       modifyDiaVisible:false,
       modifyRiderInfo:{
         id:1,
         name:'',
         gender:'',
-        tel:12,
-        perf:2
+        age:12,
+        tel:12
       },
       modifyFormRules:{ //TODO: sub important
         
@@ -123,7 +116,6 @@ export default {
       this.modifyRiderInfo.tel = this.riderInfo.tel
       this.modifyRiderInfo.gender = this.riderInfo.gender
       this.modifyRiderInfo.age = this.riderInfo.age
-      this.modifyRiderInfo.perf = this.riderInfo.perf
     },
     modifyRiderInfoClosed() {
       this.$refs.modifyInfoFormRef.resetFields()
