@@ -13,8 +13,7 @@
       <el-table :data="historyOrder">
         <el-table-column label="订单编号" width="150px" prop="id"> </el-table-column>
         <el-table-column label="订单金额" width="150px" prop="cost"> </el-table-column>
-        <el-table-column label="订单内容" width="150px" prop="detail"> </el-table-column>
-        <el-table-column label="订单日期" width="150px" prop="date"> </el-table-column>
+        <el-table-column label="订单店铺" width="150px" prop="shop"> </el-table-column>
       </el-table>
           </el-card>
     </div>
@@ -29,30 +28,6 @@ export default {
       platId:0,
       userId:0,
         historyOrder:[
-        {
-          id:1,
-          cost:100,
-          detail:"西红柿炒鸡蛋不要鸡蛋和西红柿",
-          date:"2020-12-2"
-        },
-          {
-            id:2,
-            cost:100,
-            detail:"兰州拉面不要兰州的",
-            date:"2020-12-2"
-          },
-          {
-            id:3,
-            cost:0.01,
-            detail:"蛋炒苗家赫不要蛋",
-            date:"2020-11-11"
-          },
-          {
-            id:4,
-            cost:-200,
-            detail:"冀晓青炒青小鸡",
-            date:"2020-12-17"
-          }
       ]
     }
   },
@@ -64,7 +39,6 @@ export default {
     this.$router.push('/userHome')
   },
     async getHistoryOrder(){
-    //TODO:update api
     const {data:res} = await this.$axios.post("client/history_order/",[this.platId,this.userId])
       if(res.status !== 200){
        return  this.$message.error("获取历史订单记录失败！")
