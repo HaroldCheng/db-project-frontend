@@ -40,6 +40,9 @@ export default {
     this.$message.success("获取消费信息成功！")
     this.moneyInfo = res.data.money_info
     const option = {
+      title:{
+        text:'各家店铺消费情况'
+      },
       series: {
         type: 'pie',
         data: this.moneyInfo

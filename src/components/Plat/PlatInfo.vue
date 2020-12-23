@@ -8,17 +8,71 @@
         </div>
         <div class="infoTable">
             <el-card>
-                <el-table>
-                    <el-table-column label="平台编号" width="150px"> </el-table-column>
-                    <el-table-column label="平台名称" width="150px"> </el-table-column>
-                    <el-table-column label="商家数量" width="150px"> </el-table-column>
-                    <el-table-column label="骑手数量" width="150px"> </el-table-column>
-                    <el-table-column label="用户数量" width="150px"> </el-table-column>
-                    <el-table-column label="平台收入" width="150px"> </el-table-column>
-                </el-table>
-                <el-button type="primary" class="button">编辑信息</el-button>
+              <el-row :gutter="20">
+                <el-col :span="8">
+                  <h3>平台编号</h3>
+                  <span>{{platInfo.id}}</span>
+                </el-col>
+                <el-col :span="8">
+                  <h3>平台姓名</h3>
+                  <span>{{ platInfo.name }}</span>
+                </el-col>
+                <el-col :span="8">
+                  <h3>用户数量</h3>
+                  <span>{{ platInfo.userNumber }}</span>
+                </el-col>
+              </el-row>
+              <el-row :gutter="20">
+                <el-col :span="8">
+                  <h3>商家数量</h3>
+                  <span>{{ platInfo.shopNumber }}</span>
+                </el-col>
+                <el-col :span="8">
+                  <h3>骑手数量</h3>
+                  <span>{{ platInfo.riderNumber}}</span>
+                </el-col>
+                <el-col :span="8">
+                  <h3>季度营收</h3>
+                  <span>{{ platInfo.income}}</span>
+                </el-col>
+              </el-row>
+              <p>
+                <el-button type="primary" round @click="showModifyDia()">修改信息</el-button>
+              </p>
             </el-card>
         </div>
+      <el-dialog
+          title="修改平台信息"
+          :visible.sync="modifyDiaVisible"
+          width="50%"
+          @close="modifyPlatInfoClosed"
+      >
+        <p>你可以对以下信息进行修改</p>
+        <el-form :model="modifyPlatInfo" ref="modifyInfoFormRef" label-width="90px" :rules="modifyFormRules">
+          <el-form-item label="平台编号">
+            <el-input disabled v-model="modifyPlatInfo.id"></el-input>
+          </el-form-item>
+          <el-form-item label="平台名称">
+            <el-input v-model="modifyPlatInfo.name"></el-input>
+          </el-form-item>
+          <el-form-item label="用户数量">
+            <el-input v-model="modifyPlatInfo.userNumber"></el-input>
+          </el-form-item>
+          <el-form-item label="骑手数量">
+            <el-input v-model="modifyPlatInfo.riderNumber"></el-input>
+          </el-form-item>
+          <el-form-item label="商家数量">
+            <el-input v-model="modifyPlatInfo.shopNumber"></el-input>
+          </el-form-item>
+          <el-form-item label="总营收">
+            <el-input v-model="modifyPlatInfo.income"></el-input>
+          </el-form-item>
+        </el-form>
+        <span slot="footer">
+        <el-button type="primary" round @click="modifyCheck">确定</el-button>
+        <el-button type="info" round @click="modifyCancel">取消</el-button>
+      </span>
+      </el-dialog>
     </div>
 </template>
 
@@ -26,10 +80,29 @@
 export default {
   data() {
     return {
-      riderName: "vthsll",
-    };
+      platId:1,
+      platInfo:{
+        id:1,
+        name:'mt',
+        userNumber:12,
+        shopNumber:12,
+        riderNumber:12,
+        income:1212435
+      }
+    }
+  },
+  created() {
+    this.getPlatInfo()
+  },
+  methods:{
+    async getPlatInfo(){
+      const {data:res} = await this.$axios.post('plat/plat_info/',this.platId)
+      if(res.status !== 200) return this.$message.error("获取平台信息错误")
+      this.$message.success("获取平台信息成功")
+      this.platInfo = res.data.plat_info
+    }
   }
-};
+}
 </script>
 
 <style lang="less" scoped>

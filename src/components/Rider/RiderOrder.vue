@@ -61,7 +61,7 @@ export default {
     this.$router.push('/riderHome')
   },
   pickOrder:async function(index) {
-    const {data:res} = await this.$axios.post('rider/pick_order',index)
+    const {data:res} = await this.$axios.post('rider/pick_order/',[index])
     if(res.status !== 200) {
       return this.$message.error("接单失败!")
     }
@@ -69,7 +69,7 @@ export default {
     this.orderSet[index].picked = true
   },
     async getOrderList() {
-    const {data:res} = await this.$axios.post("rider/order_list",this.riderId)
+    const {data:res} = await this.$axios.post("rider/order_list/",[this.riderId])
       if(res.status !== 200) {
         return this.$message.error("获取订单列表失败!")
       }

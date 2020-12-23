@@ -20,7 +20,17 @@ let echarts = require('echarts')
     export default {
       data(){
         return{
-          riderId:3
+          riderId:3,
+          perfInfo:[
+            {
+              name:'',
+              value:12
+            },
+            {
+              name:'',
+              value:124
+            }
+          ]
         }
       },
         methods: {
@@ -30,10 +40,20 @@ let echarts = require('echarts')
         },
       async mounted() {
         const myChart = echarts.init(document.getElementById('main'))
-        const {data:res} = await this.$axios.post('rider/perf_info',this.riderId)
+        const {data:res} = await this.$axios.post('rider/perf_info/',[this.riderId])
         if(res.status !== 200) return this.$message.error("获取业绩信息失败!")
         this.$message.success("获取消费信息成功!")
-        //TODO: here
+        this.perfInfo = res.data.perf_info
+        const option = {
+          title:{
+            text:'各平台营收情况'
+          },
+          series:{
+            type:'bar',
+            data:this.perfInfo
+          }
+        }
+        myChart.setOption(option)
       }
     }
 </script>

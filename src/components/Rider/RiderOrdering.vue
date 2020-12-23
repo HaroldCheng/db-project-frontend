@@ -69,13 +69,13 @@ export default {
     this.$router.push('/riderHome')
   },
   async getOrderingSet(){
-    const {data:res} = await this.$axios.post('rider/ordering_list',this.riderId)
+    const {data:res} = await this.$axios.post('rider/ordering_list/',[this.riderId])
     if(res.status !== 200) return this.$message.error("获取进行中的订单失败")
     this.$message.success("获取进行中的订单成功")
     this.orderingSet = res.data.ordering_list
   },
   finishOrder:async function(index,id){
-    const {data:res} = await this.$axios.post('rider/finish_order',id)
+    const {data:res} = await this.$axios.post('rider/finish_order/',[id])
     if(res.status !== 200) return this.$message.error("网络错误!")
     this.$message.success("派送成功!")
     this.orderingSet[index].finished = true
