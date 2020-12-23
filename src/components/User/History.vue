@@ -26,6 +26,8 @@
 export default {
   data(){
     return {
+      platId:0,
+      userId:0,
         historyOrder:[
         {
           id:1,
@@ -54,10 +56,22 @@ export default {
       ]
     }
   },
-methods:{
+  created() {
+    this.getHistoryOrder()
+  },
+  methods:{
   goBack() {
     this.$router.push('/userHome')
-  }
+  },
+    async getHistoryOrder(){
+    //TODO:update api
+    const {data:res} = await this.$axios.post("client/history_order/",[this.platId,this.userId])
+      if(res.status !== 200){
+       return  this.$message.error("获取历史订单记录失败！")
+      }
+      this.$message.success("获取历史订单记录成功！")
+      this.historyOrder = res.data.history_order
+    }
 }
 }
 </script>

@@ -114,5 +114,35 @@ status:200
 }
 ```
 
+---
 
+date: 12-23
+
+**历史消费信息统计表**
+
+请求地址：`client/money_info/`
+
+请求参数：`[plat_id,user_id]` 第一个是平台id，第二个是用户id
+
+响应信息格式：
+
+```js
+res{
+    data:{
+        money_info:[
+            {
+                name:'杨国富麻辣烫',
+                value:10000
+            },
+            {
+                name:'羊羊羊不麻不辣不烫',
+                value:2000
+            }
+        ]
+    }，
+   status:200
+}
+```
+
+data中的money_info是一个对象数组，每个对象表示一个商家的名称和消费量，注意`name`和`value`的名称不能改，否则统计图插件无法识别
 

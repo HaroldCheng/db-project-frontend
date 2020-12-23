@@ -80,7 +80,7 @@ export default {
     },
     async finishOrder() {
       //TODO: modify the para to backend
-      const {data:res} = await this.$axios.post("order_content",[this.platId,this.userId,this.shopId,this.orderList])
+      const {data:res} = await this.$axios.post("client/order_content/",[this.platId,this.userId,this.shopId,this.orderList])
       if(res.status!==200) {
         return this.$message.error("下单失败！")
       }

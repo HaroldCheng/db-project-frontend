@@ -54,20 +54,18 @@ export default {
     }
   },
   created() {
-    //this.getShopList()
+    this.getShopList()
   },
   methods:{
     chooseDish(shopID) {
       this.$router.push("/dish")
     },
     async regVIP(shopId) {
-      // const {data:res} = await this.$axios.post('client/vip_list/',[shopId,this.userId])
-      // if (res.status !== 200){
-      //   return this.$message.error("注册失败！")
-      // }
+      const {data:res} = await this.$axios.post('client/vip_list/',[shopId,this.userId])
+      if (res.status !== 200){
+        return this.$message.error("注册失败！")
+      }
       this.$message.success("注册成功！")
-      //TODO:modify vip btns
-      this.shopList[0].vip = true
     },
     async getShopList() {
       const {data:res} = await this.$axios.post('client/shop_list/',[this.platId,this.userId])//address and parameters

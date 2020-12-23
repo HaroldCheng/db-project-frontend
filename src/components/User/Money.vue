@@ -10,6 +10,7 @@
     </div>
     <div class="moneySats">
       <el-card>
+        <div id="main" style="width: 600px;height:400px;"></div>
       </el-card>
     </div>
 </div>
@@ -17,8 +18,37 @@
 </template>
 
 <script>
+let echarts = require('echarts')  //使用import无用，why?
 export default {
-methods:{
+  data(){
+    return{
+      platId:1,
+      userId:0,
+      moneyInfo:[
+        {name:'杨国富麻辣烫', value:100},
+        {name: '羊羊羊不麻不辣不烫', value:50},
+        {name: '洋洋嘛', value:50}
+      ]
+    }
+  },
+ async mounted() {
+    var myChart = echarts.init(document.getElementById('main'))
+    //TODO:获取用户的消费情况
+    const {data:res} = await this.$axios.post("client/money_info/",[this.platId,this.userId])
+    if(res.status !== 200) {
+      return this.$message.error("获取消费信息失败！")
+    }
+    this.$message.success("获取消费信息成功！")
+    this.moneyInfo = res.data.money_info
+    var option = {
+      series: {
+        type: 'pie',
+        data: this.moneyInfo
+      }
+    }
+    myChart.setOption(option)
+  },
+  methods:{
   goBack() {
     this.$router.push('/userHome')
   }
