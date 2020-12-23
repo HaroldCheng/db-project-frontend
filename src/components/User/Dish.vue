@@ -16,14 +16,15 @@
               <el-table-column label="#" prop="id"></el-table-column>
               <el-table-column label="菜品名称" prop="name"></el-table-column>
               <el-table-column label="菜品单价" prop="price"></el-table-column>
+              <el-table-column label="菜品销量" prop="saleNumber"></el-table-column>
               <el-table-column label="数量">
                 <template slot-scope="scope">
-                  <el-input-number v-model="scope.row.number" :min="1" size="mini"></el-input-number>
+                  <el-input-number v-model="scope.row.number" :min="0" size="mini"></el-input-number>
                 </template>
               </el-table-column>
               <el-table-column label="操作">
                 <template slot-scope="scope">
-                  <el-button type="primary" plain @click="add2order(scope.row.id)">加入订单</el-button>
+                  <el-button type="primary" plain @click="add2order(scope.row.id,scope.row.number)">加入订单</el-button>
                 </template>
               </el-table-column>
             </el-table>
@@ -46,18 +47,17 @@ export default {
         id:1,
         name:"小鸡儿炖菌子不要小鸡儿",
         price:25,
+        saleNumber:10,
         number:0
       },
         {
           id:2,
           name:"冀晓青炒青小鸡儿",
           price:-10,
+          saleNumber:14,
           number:0
         }],
-      orderList:[{
-        id:0,
-        number:0
-      }
+      orderList:[
       ]
     }
   },
@@ -66,16 +66,19 @@ export default {
   },
   methods:{
     async getDishList(){
-      const {data:res} = await this.$axios.get("dish_list",this.shopId)
+      const {data:res} = await this.$axios.post("client/dish_list/",[this.shopId])
       if(res.status!==200){
         return this.$message.error("获取菜品信息失败！")
       }
       this.$message.success("获取菜品信息成功！")
       this.dishList = res.data.dish_list
     },
-    add2order(dishID){
-      console.log(dishID)
-      this.orderList.push(dishID)
+    //TODO:modify this
+    add2order(dishID,dishNumber){
+      this.orderList.push({
+        dishID,
+        dishNumber
+      })
       console.log(this.orderList)
     },
     async finishOrder() {
