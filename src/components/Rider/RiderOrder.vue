@@ -10,14 +10,20 @@
     </div>
         <div class="historyTable">
           <el-card>
-              <el-table>
-                  <el-table-column label="订单编号" width="150px"> </el-table-column>
-                  <el-table-column label="客户地址" width="150px"> </el-table-column>
-                  <el-table-column label="客户电话" width="150px"> </el-table-column>
-                  <el-table-column label="商家地址" width="150px"> </el-table-column>
-                  <el-table-column label="商家电话" width="150px"> </el-table-column>
+              <el-table :data="orderSet">
+                  <el-table-column label="订单编号" prop="id" width="150px"> </el-table-column>
+                <el-table-column label="客户姓名" prop="userName" width="150px"></el-table-column>
+                  <el-table-column label="客户地址" prop="userAddr" width="150px"> </el-table-column>
+                  <el-table-column label="客户电话" prop="userTel" width="150px"> </el-table-column>
+                  <el-table-column label="商家地址" prop="shopAddr" width="150px"> </el-table-column>
+                  <el-table-column label="商家电话" prop="shopTel" width="150px"> </el-table-column>
+                <el-table-column label="操作" width="150px">
+                  <template slot-scope="scope">
+                    <el-button type="primary" size="small" round v-if="scope.row.picked===false" @click="pickOrder(scope.index)">接单</el-button>
+                    <el-button type="primary" size="small" round v-if="scope.row.picked===true" disabled>已接单</el-button>
 
-                  <!--接受订单的键-->
+                  </template>
+                </el-table-column>
               </el-table>
           </el-card>
     </div>
@@ -27,9 +33,31 @@
 
 <script>
 export default {
+  data(){
+    return{
+        orderSet:[
+          {
+            id:1,
+            userName:'干饭人',
+            userAddr:"NMB",
+            userTel:'110',
+            shopAddr:'美国白宫',
+            shopTel:'119',
+            picked:false
+          }
+        ],
+      pickedSet:[
+
+      ]
+    }
+  },
 methods:{
   goBack() {
     this.$router.push('/riderHome')
+  },
+  pickOrder(index) {
+    this.orderSet[index].picked = true
+    this.pickedSet.push(this.orderSet[index].id)
   }
 }
 }

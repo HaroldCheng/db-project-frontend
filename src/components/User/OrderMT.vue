@@ -73,7 +73,6 @@ export default {
         return this.$message.error("获取店铺信息失败！")
       }
       this.$message.success("获取店铺信息成功！")
-      //TODO:assign the result to shop list
       this.shopList = res.data.shop_list
     }
   }

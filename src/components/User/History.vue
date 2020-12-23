@@ -14,6 +14,7 @@
         <el-table-column label="订单编号" width="150px" prop="id"> </el-table-column>
         <el-table-column label="订单金额" width="150px" prop="cost"> </el-table-column>
         <el-table-column label="订单店铺" width="150px" prop="shop"> </el-table-column>
+        <el-table-column label="所属平台" width="150px" prop="plat"></el-table-column>
       </el-table>
           </el-card>
     </div>
@@ -25,8 +26,8 @@
 export default {
   data(){
     return {
-      platId:0,
-      userId:0,
+      platId:1,
+      userId:3,
         historyOrder:[
       ]
     }

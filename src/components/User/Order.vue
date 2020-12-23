@@ -21,7 +21,7 @@
             <el-table-column label="操作" align="center">
               <template slot-scope="scope">
                 <el-button type="primary" size="small" round @click="chooseDish(scope.row.id)">查看详情</el-button>
-                <el-button type="success" size="small" plain round @click="regVIP(scope.row.id)" v-if="scope.row.vip===false">
+                <el-button type="success" size="small" plain round @click="regVIP(scope.index)" v-if="scope.row.vip===false">
                   注册该商家会员
                 </el-button>
                 <el-button type="info" size="small" plain round v-if="scope.row.vip===true" disabled>
@@ -61,6 +61,7 @@ export default {
       this.$router.push("/dish")
     },
     async regVIP(shopId) {
+      this.shopList[shopId].vip = true
       const {data:res} = await this.$axios.post('client/vip_list/',[shopId,this.userId])
       if (res.status !== 200){
         return this.$message.error("注册失败！")
@@ -73,7 +74,6 @@ export default {
         return this.$message.error("获取店铺信息失败！")
       }
       this.$message.success("获取店铺信息成功！")
-      //TODO:assign the result to shop list
       this.shopList = res.data.shop_list
     }
   }
