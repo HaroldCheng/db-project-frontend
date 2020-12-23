@@ -23,7 +23,7 @@ export default {
   data(){
     return{
       platId:1,
-      userId:0,
+      userId:3,
       moneyInfo:[
         {name:'杨国富麻辣烫', value:100},
         {name: '羊羊羊不麻不辣不烫', value:50},
