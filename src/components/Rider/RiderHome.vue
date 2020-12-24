@@ -36,20 +36,33 @@
           </div>
       </el-aside>
     <el-main>
-        <router-view></router-view>
+        <router-view :riderId="riderLoginForm.id"></router-view>
     </el-main>
   </el-container>
 </el-container>
 </template>
 
 <script>
+import RiderInfo from "@/components/Rider/RiderInfo"
+import RiderOrder from "@/components/Rider/RiderOrder"
+import RiderOrdering from "@/components/Rider/RiderOrdering";
+import RiderHistory from "@/components/Rider/RiderHistory";
+
 export default {
+  components:{
+    RiderOrder,
+    RiderInfo,
+    RiderHistory,
+    RiderOrdering
+  },
   data(){
     return{
-      msg:'',
+      riderLoginForm:{
+      }
     }
   },
   created () {
+    this.riderLoginForm = this.$store.state.riderLoginForm
     this.activePath = window.sessionStorage.getItem('activePath')
   },
   methods:{

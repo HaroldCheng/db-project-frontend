@@ -11,6 +11,7 @@
     </div>
     <div class="infoTable">
       <el-card>
+        <h2>{{userId}}</h2>
         <el-row :gutter="20">
           <el-col :span="8">
             <h3>用户编号</h3>
@@ -89,14 +90,14 @@
 export default {
   props:['userId'],
   data() {
-    var checkTel = (rule, value, callback) => {
-      const regMobile = /^1[34578]\d{9}$/
-      if (regMobile.test(value)) {
-        return callback()
-      }
-      // 返回一个错误提示
-      callback(new Error('请输入合法的手机号码'))
-    }
+    // var checkTel = (rule, value, callback) => {
+    //   const regMobile = /^1[34578]\d{9}$/
+    //   if (regMobile.test(value)) {
+    //     return callback()
+    //   }
+    //   // 返回一个错误提示
+    //   callback(new Error('请输入合法的手机号码'))
+    // }
     return {
       userInfo: { //user's info object
         id: 0,
@@ -152,7 +153,7 @@ export default {
   },
   methods: {
     async getUserInfo() { //Transfer checked,done
-      const {data:res} = await this.$axios.post('client/get_info/', [userId])//address and parameters
+      const {data:res} = await this.$axios.post('client/get_info/', [this.userId])//address and parameters
       if (res.status !== 200) {
         return this.$message.error("获取用户信息失败！")
       }

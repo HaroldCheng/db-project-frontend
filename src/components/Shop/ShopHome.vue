@@ -67,6 +67,9 @@ export default {
       }
     }
   },
+  created() {
+    this.shopLoginForm = this.$store.state.shopLoginForm
+  },
   methods:{
     logout(){
       window.sessionStorage.clear();

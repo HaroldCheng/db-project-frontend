@@ -19,19 +19,19 @@
           :model="userForm"
           ref="userRef"
         >
-          <el-form-item prop="name">
+          <el-form-item prop="id">
             <el-input
               placeholder="用户名"
               prefix-icon="el-icon-user"
-              v-model="userForm.name"
+              v-model="userForm.id"
             ></el-input>
           </el-form-item>
-          <el-form-item prop="pass">
+          <el-form-item prop="password">
             <el-input
               placeholder="密码"
               prefix-icon="el-icon-lock"
-              v-model="userForm.pass"
-              type="password"
+              v-model="userForm.password"
+              type="passwordword"
             ></el-input>
           </el-form-item>
           <el-form-item class="btns">
@@ -56,19 +56,19 @@
           :model="riderForm"
           ref="riderRef"
         >
-          <el-form-item prop="name">
+          <el-form-item prop="id">
             <el-input
               placeholder="用户名"
               prefix-icon="el-icon-user"
-              v-model="riderForm.name"
+              v-model="riderForm.id"
             ></el-input>
           </el-form-item>
-          <el-form-item prop="pass">
+          <el-form-item prop="password">
             <el-input
               placeholder="密码"
               prefix-icon="el-icon-lock"
-              v-model="riderForm.pass"
-              type="password"
+              v-model="riderForm.password"
+              type="passwordword"
             ></el-input>
           </el-form-item>
           <el-form-item class="btns">
@@ -93,19 +93,19 @@
           :model="platForm"
           ref="platRef"
         >
-          <el-form-item prop="name">
+          <el-form-item prop="id">
             <el-input
               placeholder="用户名"
               prefix-icon="el-icon-user"
-              v-model="platForm.name"
+              v-model="platForm.id"
             ></el-input>
           </el-form-item>
-          <el-form-item prop="pass">
+          <el-form-item prop="password">
             <el-input
               placeholder="密码"
               prefix-icon="el-icon-lock"
-              v-model="platForm.pass"
-              type="password"
+              v-model="platForm.password"
+              type="passwordword"
             ></el-input>
           </el-form-item>
           <el-form-item class="btns">
@@ -130,19 +130,19 @@
           :model="shopForm"
           ref="shopRef"
         >
-          <el-form-item prop="name">
+          <el-form-item prop="id">
             <el-input
               placeholder="用户名"
               prefix-icon="el-icon-user"
-              v-model="shopForm.name"
+              v-model="shopForm.id"
             ></el-input>
           </el-form-item>
-          <el-form-item prop="pass">
+          <el-form-item prop="password">
             <el-input
               placeholder="密码"
               prefix-icon="el-icon-lock"
-              v-model="shopForm.pass"
-              type="password"
+              v-model="shopForm.password"
+              type="passwordword"
             ></el-input>
           </el-form-item>
           <el-form-item class="btns">
@@ -160,23 +160,23 @@ export default {
   data() {
     return {
       userForm: {
-        name: "",
-        pass: "",
+        id: "",
+        passwordword: "",
       },
       riderForm: {
-        name: "",
-        pass: "",
+        id: "",
+        passwordword: "",
       },
       platForm: {
-        name: "",
-        pass: "",
+        id: "",
+        password: "",
       },
       shopForm: {
-        name: "",
-        pass: "",
+        id: "",
+        password: "",
       },
       loginRules: {
-        name: [
+        id: [
           { required: true, message: "请输入用户名", trigger: "blur" },
           {
             min: 1,
@@ -185,7 +185,7 @@ export default {
             trigger: "blur",
           },
         ],
-        pass: [
+        password: [
           { required: true, message: "请输入用户密码", trigger: "blur" },
           {
             min: 6,
@@ -198,55 +198,50 @@ export default {
     };
   },
   methods: {
-    loginUser() {
-      this.$refs.userRef.validate((valid) => {
-        if (!valid) return false;
-        const {data:res} = this.$axios.post("login_user/",this.userForm)//请求地址和参数
-        if(res.status!==200) return this.$message.error("登陆失败")
+    async loginUser() {
+        // const {data:res} = await this.$axios.post("login_user/",this.userForm)//请求地址和参数
+        // if(res.status===250) return this.$message.error("不存在该用户")
+        // if(res.status===270) return this.$message.error("密码错误")
+        // if(res.status!==200) return this.$message.error("未知错误")
         this.$message.success("登录成功")
         this.$store.commit('loginUser',this.userForm)
         this.$router.push("/userHome")
-      })
     },
     resetUser() {
       this.$refs.userRef.resetFields();
     },
-    loginRider() {
-      this.$refs.riderRef.validate((valid)=>{
-        if(!valid) return false
-        const {data:res} = this.$axios.post("login_rider/",this.riderForm)
-        if(res.status!== 200) return this.$message.error("登陆失败")
+    async loginRider() {
+        const {data:res} =await this.$axios.post("login_rider/",this.riderForm)
+        if(res.status===250) return this.$message.error("不存在该用户")
+        if(res.status===270) return this.$message.error("密码错误")
+        if(res.status!==200) return this.$message.error("未知错误")
         this.$message.success("登录成功")
         this.$store.commit('loginRider',this.riderForm)
         this.$router.push("/riderHome")
-      })
-
     },
     resetRider() {
       this.$refs.riderRef.resetFields();
     },
-    loginPlat() {
-      this.$refs.platRef.validate((valid)=>{
-        if(!valid) return false
-        const {data:res} = this.$axios.post("login_plat/",this.platForm)
-        if(res.status!== 200) return this.$message.error("登陆失败")
+    async loginPlat() {
+        const {data:res} = await this.$axios.post("login_plat/",this.platForm)
+        if(res.status===250) return this.$message.error("不存在该用户")
+        if(res.status===270) return this.$message.error("密码错误")
+        if(res.status!==200) return this.$message.error("未知错误")
         this.$message.success("登录成功")
         this.$store.commit('loginPlat',this.platForm)
         this.$router.push("/platHome");
-      })
     },
     resetPlat() {
       this.$refs.platRef.resetFields();
     },
-    loginShop() {
-      this.$refs.shopRef.validate((valid)=>{
-        if(!valid) return false
-        const {data:res} = this.$axios.post("login_shop/",this.shopForm)
-        if(res.status!== 200) return this.$message.error("登陆失败")
+    async loginShop() {
+        const {data:res} = await this.$axios.post("login_shop/",this.shopForm)
+        if(res.status===250) return this.$message.error("不存在该用户")
+        if(res.status===270) return this.$message.error("密码错误")
+        if(res.status!==200) return this.$message.error("未知错误")
         this.$message.success("登录成功")
         this.$store.commit('loginShop',this.shopForm)
         this.$router.push("/shopHome");
-      })
     },
     resetShop() {
       this.$refs.shopRef.resetFields();
