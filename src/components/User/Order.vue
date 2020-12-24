@@ -59,19 +59,19 @@ export default {
   },
   methods:{
     chooseDish(shopID) {
-
+      this.$store.commit('userChooseShop',this.platId,shopID)
       this.$router.push("/dish")
     },
     regVIP:async function(p) {
       this.shopList[p].vip = true
-      const {data:res} = await this.$axios.post('client/vip_list/',[p,userId])
+      const {data:res} = await this.$axios.post('client/vip_list/',[p,this.userId])
       if (res.status !== 200){
         return this.$message.error("注册失败！")
       }
       this.$message.success("注册成功！")
     },
     async getShopList() {
-      const {data:res} = await this.$axios.post('client/shop_list/',[this.platId,userId])//address and parameters
+      const {data:res} = await this.$axios.post('client/shop_list/',[this.platId,this.userId])//address and parameters
       if (res.status !== 200){
         return this.$message.error("获取店铺信息失败！")
       }

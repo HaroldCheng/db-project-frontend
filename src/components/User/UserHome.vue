@@ -69,13 +69,11 @@ export default {
         id:12,
         password:''
       },
-      userId:0,
       activePath:''
     }
   },
   created () {
     this.userLoginForm = this.$store.state.userLoginForm
-    console.log(this.userLoginForm)
     this.activePath = window.sessionStorage.getItem('activePath')
   },
   methods: {

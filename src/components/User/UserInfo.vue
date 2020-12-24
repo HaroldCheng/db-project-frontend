@@ -11,7 +11,6 @@
     </div>
     <div class="infoTable">
       <el-card>
-        <h2>{{userId}}</h2>
         <el-row :gutter="20">
           <el-col :span="8">
             <h3>用户编号</h3>
@@ -99,7 +98,7 @@ export default {
     //   callback(new Error('请输入合法的手机号码'))
     // }
     return {
-      userInfo: { //user's info object
+      userInfo: {
         id: 0,
         name: "",
         age:12,
@@ -118,33 +117,33 @@ export default {
         gender: "",
         out:0,
       },
-      modifyFormRules: {
-        newName: [
-          {required: true, message: '请输入修改后的用户名', trigger: blur},
-          {
-            min: 3,
-            max: 10,
-            message: "长度在 3 到 10 个字符",
-            trigger: "blur"
-          }
-        ],
-        newTel: [
-          {required: true, message: '请输入修改后的电话号码', trigger: blur},
-          {validator: checkTel, trigger: "blur"}
-        ],
-        newGender: [
-          {required: true, message: '请输入修改后的性别', trigger: blur}
-        ],
-        newAddress: [
-          {required: true, message: '请输入修改后的地址', trigger: blur},
-          {
-            min: 3,
-            max: 6,
-            message: "长度在 3 到 6 个字符",
-            trigger: "blur"
-          }
-        ]
-      }
+      // modifyFormRules: {
+      //   newName: [
+      //     {required: true, message: '请输入修改后的用户名', trigger: blur},
+      //     {
+      //       min: 3,
+      //       max: 10,
+      //       message: "长度在 3 到 10 个字符",
+      //       trigger: "blur"
+      //     }
+      //   ],
+      //   newTel: [
+      //     {required: true, message: '请输入修改后的电话号码', trigger: blur},
+      //     {validator: checkTel, trigger: "blur"}
+      //   ],
+      //   newGender: [
+      //     {required: true, message: '请输入修改后的性别', trigger: blur}
+      //   ],
+      //   newAddress: [
+      //     {required: true, message: '请输入修改后的地址', trigger: blur},
+      //     {
+      //       min: 3,
+      //       max: 6,
+      //       message: "长度在 3 到 6 个字符",
+      //       trigger: "blur"
+      //     }
+      //   ]
+      // }
 
     };
   },
@@ -174,10 +173,6 @@ export default {
       this.$refs.modifyInfoFormRef.resetFields()
     },
     async modifyCheck() {
-      //TODO:表单预验证
-      /*1. validation预验证
-      * 2. 向后端发送修改请求
-      * 3. 修改成功后，更新当前userInfo信息*/
       const {data:res} = await this.$axios.post("client/edit_info/",this.modifyUserInfo)
       if(res.status !== 200){
         return this.$message.error("修改失败")

@@ -24,10 +24,9 @@
 
 <script>
 export default {
+  props:['userId'],
   data(){
     return {
-      platId:1,
-      userId:3,
         historyOrder:[
       ]
     }
@@ -40,7 +39,8 @@ export default {
     this.$router.push('/userHome')
   },
     async getHistoryOrder(){
-    const {data:res} = await this.$axios.post("client/history_order/",[this.platId,this.userId])
+    //TODO: modify here
+    const {data:res} = await this.$axios.post("client/history_order/",[this.userId])
       if(res.status !== 200){
        return  this.$message.error("获取历史订单记录失败！")
       }

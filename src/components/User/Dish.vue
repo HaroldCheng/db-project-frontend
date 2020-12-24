@@ -48,10 +48,10 @@
 
 <script>
 export default {
+  props:['userId'],
   data(){
     return{
       platId:0,
-      userId:0,
       shopId:0,
       dishList:[{
         id:1,
@@ -72,9 +72,8 @@ export default {
     }
   },
   created() {
-    this.platId = this.$store.state.userChooseDishInfo.platId
-    this.userId = this.$store.state.userChooseDishInfo.userId
-    this.shopId = this.$store.state.userChooseDishInfo.shopId
+    this.platId = this.$store.state.userChooseShopInfo.platId
+    this.shopId = this.$store.state.userChooseShopInfo.shopId
     this.getDishList()
   },
   methods:{

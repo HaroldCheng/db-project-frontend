@@ -38,10 +38,10 @@
 
 <script>
 export default {
+  props:['userId'],
   data(){
     return{
       platId:1,
-      userId:3,
       shopList:[
         {
           id:1,
@@ -58,6 +58,7 @@ export default {
   },
   methods:{
     chooseDish(shopID) {
+      this.$store.commit('userChooseShop',this.platId,shopID)
       this.$router.push("/dish")
     },
     async regVIP(shopId) {

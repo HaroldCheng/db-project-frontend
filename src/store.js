@@ -20,6 +20,10 @@ export default new Vuex.Store({
         shopLoginForm:{
             id:4,
             password:'123123'
+        },
+        userChooseShopInfo:{
+            platId:0,
+            shopId:0
         }
     },
     mutations:{
@@ -34,6 +38,10 @@ export default new Vuex.Store({
         },
         loginShop(state,form){
             state.shopLoginForm = form
+        },
+        userChooseShop(state,pid,sid){
+            state.userChooseShopInfo.platId = pid
+            state.userChooseShopInfo.shopId = sid
         }
     },
     actions:{

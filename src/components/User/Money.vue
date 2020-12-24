@@ -20,10 +20,9 @@
 <script>
 let echarts = require('echarts')  //使用import无用，why?
 export default {
+  props:['userId'],
   data(){
     return{
-      platId:1,
-      userId:3,
       moneyInfo:[
         {name:'杨国富麻辣烫', value:100},
         {name: '羊羊羊不麻不辣不烫', value:50},
@@ -33,7 +32,8 @@ export default {
   },
  async mounted() {
     const myChart = echarts.init(document.getElementById('main'))
-    const {data:res} = await this.$axios.post("client/money_info/",[this.platId,this.userId])
+   //TODO: remove platid here
+    const {data:res} = await this.$axios.post("client/money_info/",[this.userId])
     if(res.status !== 200) {
       return this.$message.error("获取消费信息失败！")
     }

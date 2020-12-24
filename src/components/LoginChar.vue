@@ -31,7 +31,7 @@
               placeholder="密码"
               prefix-icon="el-icon-lock"
               v-model="userForm.password"
-              type="passwordword"
+              type="password"
             ></el-input>
           </el-form-item>
           <el-form-item class="btns">
@@ -68,7 +68,7 @@
               placeholder="密码"
               prefix-icon="el-icon-lock"
               v-model="riderForm.password"
-              type="passwordword"
+              type="password"
             ></el-input>
           </el-form-item>
           <el-form-item class="btns">
@@ -105,7 +105,7 @@
               placeholder="密码"
               prefix-icon="el-icon-lock"
               v-model="platForm.password"
-              type="passwordword"
+              type="password"
             ></el-input>
           </el-form-item>
           <el-form-item class="btns">
@@ -142,7 +142,7 @@
               placeholder="密码"
               prefix-icon="el-icon-lock"
               v-model="shopForm.password"
-              type="passwordword"
+              type="password"
             ></el-input>
           </el-form-item>
           <el-form-item class="btns">
@@ -161,11 +161,11 @@ export default {
     return {
       userForm: {
         id: "",
-        passwordword: "",
+        password: "",
       },
       riderForm: {
         id: "",
-        passwordword: "",
+        password: "",
       },
       platForm: {
         id: "",
@@ -199,10 +199,10 @@ export default {
   },
   methods: {
     async loginUser() {
-        // const {data:res} = await this.$axios.post("login_user/",this.userForm)//请求地址和参数
-        // if(res.status===250) return this.$message.error("不存在该用户")
-        // if(res.status===270) return this.$message.error("密码错误")
-        // if(res.status!==200) return this.$message.error("未知错误")
+        const {data:res} = await this.$axios.post("login_user/",this.userForm)//请求地址和参数
+        if(res.status===250) return this.$message.error("不存在该用户")
+        if(res.status===270) return this.$message.error("密码错误")
+        if(res.status!==200) return this.$message.error("未知错误")
         this.$message.success("登录成功")
         this.$store.commit('loginUser',this.userForm)
         this.$router.push("/userHome")
