@@ -8,11 +8,10 @@
     </div>
     <div class="historyTable">
       <el-card>
-        <el-table>
-          <el-table-column label="订单编号" width="150px"> </el-table-column>
-          <el-table-column label="订单金额" width="150px"> </el-table-column>
-          <el-table-column label="订单内容" width="150px"> </el-table-column>
-          <el-table-column label="订单平台" width="150px"> </el-table-column>
+        <el-table :data="historyList">
+          <el-table-column label="订单编号" prop="id" width="150px"> </el-table-column>
+          <el-table-column label="订单金额" prop="cost" width="150px"> </el-table-column>
+          <el-table-column label="订单平台" prop="plat" width="150px"> </el-table-column>
         </el-table>
       </el-card>
     </div>
@@ -33,14 +32,15 @@ export default {
     }
   },
   created() {
-
+    this.getOrderList()
   },
   methods: {
     async getOrderList(){
-      const {data:res} = await this.$axios.post('shop/order_list/',[this.shopId])
+      const {data:res} = await this.$axios.post('shop/history_list/',[this.shopId])
       if(res.status !== 200) return this.$message.error("刷新失败！")
-      this.$message.success("获取成功")
-      this.orderList = res.data.order_list
+      this.$message.success("获取成功~")
+      this.historyList = res.data.history_list
+      console.log(res.data.history_list)
     },
     goBack() {
       this.$router.push('/shopHome')

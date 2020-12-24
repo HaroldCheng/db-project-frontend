@@ -8,16 +8,10 @@
         </div>
         <div class="historyTable">
             <el-card>
-                <el-table>
-                    <el-table-column label="订单编号" width="150px"> </el-table-column>
-                    <el-table-column label="订单金额" width="150px"> </el-table-column>
-                    <el-table-column label="订单内容" width="150px"> </el-table-column>
-                    <el-table-column label="订单平台" width="150px"> </el-table-column>
-                  <el-table-column label="操作" width="150px">
-                    <template slot-scope="scope">
-                      <el-button type="primary" round size="small" @click="finishOrder(scope.row.id)">完成订单</el-button>
-                    </template>
-                  </el-table-column>
+                <el-table :data="orderList">
+                    <el-table-column label="订单编号" prop="id" width="150px"> </el-table-column>
+                    <el-table-column label="订单金额" prop="cost" width="150px"> </el-table-column>
+                    <el-table-column label="订单平台" prop="plat" width="150px"> </el-table-column>
                 </el-table>
             </el-card>
         </div>
@@ -32,13 +26,16 @@
         return{
           orderList:[
             {
+                id:0,
+                cost:100,
+                plat:'镁团'
 
             }
           ]
         }
       },
       created() {
-
+        this.getOrderList()
       },
       methods: {
         async getOrderList(){
@@ -47,12 +44,12 @@
           this.$message.success("获取成功")
           this.orderList = res.data.order_list
         },
-        finishOrder:async function(id){
-          const {data:res}= await this.$axios.post('shop/finish_order/',[id])
-          if(res.status !== 200) return this.$message.error("网络错误")
-          this.$message.success("完成订单")
-          this.orderList = res.data.order_list
-        },
+        // finishOrder:async function(id){
+        //   const {data:res}= await this.$axios.post('shop/finish_order/',[id])
+        //   if(res.status !== 200) return this.$message.error("网络错误")
+        //   this.$message.success("完成订单")
+        //   this.orderList = res.data.order_list
+        // },
             goBack() {
                 this.$router.push('/shopHome')
             }

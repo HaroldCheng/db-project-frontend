@@ -46,10 +46,6 @@ export default {
       series: {
         type: 'pie',
         data: this.moneyInfo
-      },
-      tooltip:{
-        trigger:'item',
-        triggerOn:'mousemove'
       }
     }
     myChart.setOption(option)

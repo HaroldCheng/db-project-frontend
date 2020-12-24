@@ -64,6 +64,7 @@ export default {
         shopId:shopID
       }
       this.$store.commit('userChooseShop',ids)
+      console.log(this.$store.state.userChooseShopInfo)
       this.$router.push("/dish")
     },
     regVIP:async function(p) {

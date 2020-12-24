@@ -61,12 +61,6 @@
           <el-form-item label="店铺地址">
             <el-input v-model="modifyShopInfo.address"></el-input>
           </el-form-item>
-          <el-form-item label="菜品数量">
-            <el-input disabled v-model="modifyShopInfo.dishNumber"></el-input>
-          </el-form-item>
-          <el-form-item label="店铺销量">
-            <el-input disabled v-model="modifyShopInfo.saleNumber"></el-input>
-          </el-form-item>
         </el-form>
         <span slot="footer">
         <el-button type="primary" round @click="modifyCheck">确定</el-button>
@@ -94,9 +88,7 @@ export default {
         id:1,
         name:'',
         tel:'12',
-        address:'23',
-        dishNumber:21,
-        saleNumber:129
+        address:'23'
       },
       modifyFormRules:{
 
@@ -120,8 +112,7 @@ export default {
       this.modifyShopInfo.id = this.shopInfo.id
       this.modifyShopInfo.name = this.shopInfo.name
       this.modifyShopInfo.tel = this.shopInfo.tel
-      this.modifyShopInfo.gender = this.shopInfo.gender
-      this.modifyShopInfo.age = this.shopInfo.age
+      this.modifyShopInfo.address = this.shopInfo.address
     },
     modifyShopInfoClosed() {
       this.$refs.modifyInfoFormRef.resetFields()
@@ -133,6 +124,7 @@ export default {
       }
       this.shopInfo = this.modifyShopInfo
       this.$message.success("修改成功")
+      this.shopInfo = res.data.shop_info
       this.modifyDiaVisible = false
     },
     modifyCancel() {

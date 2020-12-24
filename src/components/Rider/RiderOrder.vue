@@ -83,6 +83,6 @@ export default {
 .historyTable {
     margin-left: 40px;
   margin-top: 40px;
-  width: 90%;
+  width: 100%;
 }
 </style>

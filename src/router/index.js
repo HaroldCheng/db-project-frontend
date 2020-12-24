@@ -25,6 +25,7 @@ const ShopInfo = () => import('../components/Shop/ShopInfo.vue')
 const ShopOrder = () => import('../components/Shop/ShopOrder.vue')
 const ShopIncome = () => import('../components/Shop/ShopIncome.vue')
 const ShopDish = () => import('../components/Shop/ShopDish.vue')
+const ShopHistory = () => import('../components/Shop/ShopHistory')
 
 const PlatWel = () => import('../components/Plat/PlatWel.vue')
 const PlatInfo = () => import('../components/Plat/PlatInfo.vue')
@@ -88,7 +89,8 @@ const routes = [
             { path: '/shopInfo', component: ShopInfo },
             { path: '/shopOrder', component: ShopOrder },
             { path: '/shopDish', component: ShopDish },
-            { path: '/shopIncome', component: ShopIncome }]
+            { path: '/shopIncome', component: ShopIncome },
+            {path:'/shopHistory',component:ShopHistory}]
     }
 ]
 

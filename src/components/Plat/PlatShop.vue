@@ -77,7 +77,7 @@ export default {
       this.shopList = res.data.shop_list
     },
     killShop:async function(id) {
-      const {data:res} = await this.$axios.post('plat/shop_kill/',[id])
+      const {data:res} = await this.$axios.post('plat/shop_kill/',[this.platId,id])
       if(res.status !== 200) return this.$message.error("删除店铺失败！")
       this.$message.success("删除店铺成功")
       this.shopList = res.data.shop_list  //返回新的店铺列表
@@ -91,7 +91,7 @@ export default {
       this.$refs.modifyInfoFormRef.resetFields()
     },
     async modifyCheck(){
-      const {data:res} = await this.$axios.post('plat/edit_shop_star/',this.modifyStarInfo)
+      const {data:res} = await this.$axios.post('plat/edit_shop_star/',[this.modifyStarInfo,this.platId])
       if(res.status !== 200) return this.$message.error("修改星级失败！")
       this.$message.success("修改星级成功")
       this.shopList = res.data.shop_list

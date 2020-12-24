@@ -10,7 +10,7 @@
             <el-card>
               <el-table :data="orderingSet">
                 <el-table-column label="#" prop="id" width="80px"> </el-table-column>
-                <el-table-column label="客户姓名" prop="userName" width="100px"></el-table-column>
+                <el-table-column label="客户姓名" prop="userName" width="150px"></el-table-column>
                 <el-table-column label="客户地址" prop="userAddr" width="150px"> </el-table-column>
                 <el-table-column label="客户电话" prop="userTel" width="150px"> </el-table-column>
                 <el-table-column label="商家姓名" prop="shopName" width="100px"></el-table-column>
@@ -88,6 +88,6 @@ export default {
     .historyTable {
         margin-left: 40px;
         margin-top: 40px;
-        width: 90%;
+        width: 80%;
     }
 </style>

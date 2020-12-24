@@ -77,7 +77,7 @@ export default {
       this.riderList = res.data.rider_list
     },
     killRider:async function(id) {
-      const {data:res} = await this.$axios.post('plat/rider_kill/',[id])
+      const {data:res} = await this.$axios.post('plat/rider_kill/',[this.platId,id])
       if(res.status!==200) return this.$message.error("开除骑手失败！")
       this.$message.success("开除骑手成功！")
       this.riderList = res.data.rider_list
@@ -91,7 +91,7 @@ export default {
       this.$refs.modifyInfoFormRef.resetFields()
     },
     async modifyCheck(){
-      const {data:res} = await this.$axios.post('plat/edit_rider_star/',this.modifyStarInfo)
+      const {data:res} = await this.$axios.post('plat/edit_rider_star/',[this.platId,this.modifyStarInfo])
       if(res.status !== 200) return this.$message.error("修改星级失败！")
       this.$message.success("修改星级成功")
       this.riderList = res.data.rider_list

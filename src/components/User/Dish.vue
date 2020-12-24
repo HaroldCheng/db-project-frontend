@@ -65,6 +65,7 @@ export default {
   created() {
     this.platId = this.$store.state.userChooseShopInfo.platId
     this.shopId = this.$store.state.userChooseShopInfo.shopId
+    console.log(this.$store.state.userChooseShopInfo)
     this.getDishList()
   },
   methods:{

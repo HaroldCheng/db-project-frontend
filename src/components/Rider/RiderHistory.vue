@@ -44,7 +44,7 @@ let echarts = require('echarts')
         this.platIncome = res.data.plat_income
         const option = {
           title:{
-            text:'在各平台派单数量'
+            text:'在各平台营收情况'
           },
           xAxis:{
             data:this.platBelongs
@@ -54,10 +54,6 @@ let echarts = require('echarts')
             name:'收入',
             type:'bar',
             data:this.platIncome
-          },
-          tooltip:{
-            trigger:'item',
-            triggerOn:'mousemove'
           }
         }
         myChart.setOption(option)

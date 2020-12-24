@@ -46,6 +46,7 @@ export default {
       const {data:res} = await this.$axios.post('plat/user_list/',[this.platId])
       if(res.status !== 200) return this.$message.error("获取用户列表失败！")
       this.$message.success("获取用户列表成功！")
+        console.log(res.data.user_list)
       this.userList = res.data.user_list
     }
   }

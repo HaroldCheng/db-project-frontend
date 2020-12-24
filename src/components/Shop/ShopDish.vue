@@ -93,7 +93,7 @@ export default {
       this.$refs.addDishFormRef.resetFields()
     },
     deleteDish:async function(id) {
-      const {data:res} = await this.$axios.post('shop/delete_dish/',[id])
+      const {data:res} = await this.$axios.post('shop/delete_dish/',[id, this.shopId])
       if(res.status !== 200) return this.$message.error("删除失败")
       this.$message.success("删除成功")
       this.dishList = res.data.dish_list
