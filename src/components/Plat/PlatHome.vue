@@ -1,14 +1,12 @@
 <template>
 <el-container class="userHomeContainer">
   <el-header>
-    <div>
       <span>多平台外卖系统</span>
-    </div>
-    <el-button class="logout_button" type="info" @click="logout">退出</el-button>
+    <el-button plain @click="logout">退出</el-button>
   </el-header>
-  <el-container class="aside_main">
-      <el-aside width="300px">
-          <el-menu class="aside_menu"
+  <el-container>
+      <el-aside>
+          <el-menu
                    background-color="#ffc300"
                    text-color="#fff"
                    active-text-color="black"
@@ -16,18 +14,23 @@
                    :default-active="activePath">
 
               <el-menu-item index="platInfo" class="aside_menu1" @click="saveNavState('platInfo')">
+                <i class="el-icon-user-solid"></i>
                   <span>平台基本信息</span>
               </el-menu-item>
               <el-menu-item index="platShop" class="aside_menu2" @click="saveNavState('platShop')">
-                  <span>平台商家</span>
+                <i class="el-icon-s-shop"></i>
+                <span>平台商家</span>
               </el-menu-item>
               <el-menu-item index="platUser" class="aside_menu3" @click="saveNavState('platUser')">
+                <i class="el-icon-user-solid"></i>
                   <span>平台客户</span>
               </el-menu-item>
               <el-menu-item index="platRider" class="aside_menu4" @click="saveNavState('platRider')">
+                <i class="el-icon-caret-right"></i>
                   <span>平台骑手</span>
               </el-menu-item>
               <el-menu-item index="platIncome" class="aside_menu5" @click="saveNavState('platIncome')">
+                <i class="el-icon-s-finance"></i>
                   <span>平台财务情况</span>
               </el-menu-item>
           </el-menu>
@@ -52,10 +55,16 @@ export default {
       msg:'',
     }
   },
+  created () {
+    this.activePath = window.sessionStorage.getItem('activePath')
+  },
   methods:{
     logout(){
       window.sessionStorage.clear();
       this.$router.push('/login');
+    },
+    saveNavState(activePath) {
+      window.sessionStorage.setItem('activePath',activePath)
     }
   }
 };

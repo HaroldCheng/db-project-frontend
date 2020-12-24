@@ -87,6 +87,7 @@
 
 <script>
 export default {
+  props:['userId'],
   data() {
     var checkTel = (rule, value, callback) => {
       const regMobile = /^1[34578]\d{9}$/
@@ -97,11 +98,6 @@ export default {
       callback(new Error('请输入合法的手机号码'))
     }
     return {
-      userLoginInfo: {
-        //TODO:user's id and password from component_LoginChar
-        id:3,
-        password:"sjknb"
-      },
       userInfo: { //user's info object
         id: 0,
         name: "",
@@ -156,7 +152,7 @@ export default {
   },
   methods: {
     async getUserInfo() { //Transfer checked,done
-      const {data:res} = await this.$axios.post('client/get_info/', this.userLoginInfo)//address and parameters
+      const {data:res} = await this.$axios.post('client/get_info/', [userId])//address and parameters
       if (res.status !== 200) {
         return this.$message.error("获取用户信息失败！")
       }

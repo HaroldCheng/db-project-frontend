@@ -74,6 +74,7 @@ export default {
         return this.$message.error("获取订单列表失败!")
       }
       this.$message.success("获取订单列表成功!")
+      this.orderSet = res.data.order_list
     }
 }
 }

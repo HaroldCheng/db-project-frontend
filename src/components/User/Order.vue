@@ -38,10 +38,10 @@
 
 <script>
 export default {
+  props:['userId'],
   data(){
     return{
       platId:2,
-      userId:3,
       shopList:[
         {
           id:1,
@@ -54,22 +54,24 @@ export default {
     }
   },
   created() {
-    // this.getShopList()
+    this.userId = this.$store.state.userLoginForm.id
+    this.getShopList()
   },
   methods:{
-    // chooseDish(shopID) {
-    //   this.$router.push("/dish")
-    // },
+    chooseDish(shopID) {
+
+      this.$router.push("/dish")
+    },
     regVIP:async function(p) {
       this.shopList[p].vip = true
-      const {data:res} = await this.$axios.post('client/vip_list/',[p,this.userId])
+      const {data:res} = await this.$axios.post('client/vip_list/',[p,userId])
       if (res.status !== 200){
         return this.$message.error("注册失败！")
       }
       this.$message.success("注册成功！")
     },
     async getShopList() {
-      const {data:res} = await this.$axios.post('client/shop_list/',[this.platId,this.userId])//address and parameters
+      const {data:res} = await this.$axios.post('client/shop_list/',[this.platId,userId])//address and parameters
       if (res.status !== 200){
         return this.$message.error("获取店铺信息失败！")
       }

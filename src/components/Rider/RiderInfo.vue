@@ -95,7 +95,7 @@ export default {
       modifyFormRules:{ //TODO: sub important
         
       }
-    };
+    }
   },
   created() {
     this.getRiderInfo()

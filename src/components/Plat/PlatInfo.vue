@@ -56,16 +56,16 @@
             <el-input v-model="modifyPlatInfo.name"></el-input>
           </el-form-item>
           <el-form-item label="用户数量">
-            <el-input v-model="modifyPlatInfo.userNumber"></el-input>
+            <el-input disabled v-model="modifyPlatInfo.userNumber"></el-input>
           </el-form-item>
           <el-form-item label="骑手数量">
-            <el-input v-model="modifyPlatInfo.riderNumber"></el-input>
+            <el-input disabled v-model="modifyPlatInfo.riderNumber"></el-input>
           </el-form-item>
           <el-form-item label="商家数量">
-            <el-input v-model="modifyPlatInfo.shopNumber"></el-input>
+            <el-input disabled v-model="modifyPlatInfo.shopNumber"></el-input>
           </el-form-item>
           <el-form-item label="总营收">
-            <el-input v-model="modifyPlatInfo.income"></el-input>
+            <el-input disabled v-model="modifyPlatInfo.income"></el-input>
           </el-form-item>
         </el-form>
         <span slot="footer">
@@ -80,7 +80,10 @@
 export default {
   data() {
     return {
-      platId:1,
+      platLoginInfo:{
+        id:3,
+        password:'sd'
+      },
       platInfo:{
         id:1,
         name:'mt',
@@ -88,11 +91,24 @@ export default {
         shopNumber:12,
         riderNumber:12,
         income:1212435
+      },
+      modifyDiaVisible:false,
+      modifyPlatInfo:{
+        id:1,
+        name:'mt',
+        userNumber:12,
+        shopNumber:12,
+        riderNumber:12,
+        income:1212435
+      },
+      modifyFormRules:{
+
       }
     }
   },
   created() {
-    this.getPlatInfo()
+    console.log("Here")
+    // this.getPlatInfo()
   },
   methods:{
     async getPlatInfo(){
@@ -100,6 +116,30 @@ export default {
       if(res.status !== 200) return this.$message.error("获取平台信息错误")
       this.$message.success("获取平台信息成功")
       this.platInfo = res.data.plat_info
+    },
+    showModifyDia(){
+      this.modifyDiaVisible = true
+      this.modifyPlatInfo.id = this.platInfo.id
+      this.modifyPlatInfo.name = this.platInfo.name
+      this.modifyPlatInfo.userNumber = this.platInfo.userNumber
+      this.modifyPlatInfo.shopNumber = this.platInfo.shopNumber
+      this.modifyPlatInfo.riderNumber = this.platInfo.riderNumber
+      this.modifyPlatInfo.income = this.platInfo.income
+    },
+    modifyPlatInfoClosed(){
+      this.$refs.modifyInfoFormRef.resetFields()
+    },
+    async modifyCheck(){
+      const {data:res} = await this.$axios.post('plat/edit/info/',this.modifyPlatInfo)
+      if(res.status !== 200){
+        return this.$message.error("修改失败")
+      }
+      this.platInfo = this.modifyPlatInfo
+      this.$message.success("修改成功")
+      this.modifyDiaVisible = false
+    },
+    modifyCancel(){
+      this.modifyDiaVisible = false
     }
   }
 }

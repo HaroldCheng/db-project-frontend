@@ -4,6 +4,7 @@ import router from './router'
 import './plugins/element.js'
 import './assets/css/global.css'
 import axios from 'axios'
+import store from './store'
 Vue.config.productionTip = false
 axios.defaults.baseURL='http://127.0.0.1:8000' //axios的请求根路径
 import qs from 'qs'
@@ -27,5 +28,6 @@ axios.interceptors.request.use((config) => {
 Vue.prototype.$axios=axios
 new Vue({
   router,
+  store,
   render: h => h(App)
 }).$mount('#app')

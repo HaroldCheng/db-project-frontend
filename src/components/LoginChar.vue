@@ -1,7 +1,7 @@
 <template>
   <div class="charContainer">
     <div class="title">
-      <h2>欢迎来到同福多平台外卖系统</h2>
+      <h2>欢迎来到干饭人多平台外卖系统</h2>
       <h2>请根据你的身份登录</h2>
     </div>
     <!--不同身份的登录界面-->
@@ -179,9 +179,9 @@ export default {
         name: [
           { required: true, message: "请输入用户名", trigger: "blur" },
           {
-            min: 3,
+            min: 1,
             max: 10,
-            message: "长度在 3 到 10 个字符",
+            message: "长度在 1 到 10 个字符",
             trigger: "blur",
           },
         ],
@@ -201,9 +201,10 @@ export default {
     loginUser() {
       this.$refs.userRef.validate((valid) => {
         if (!valid) return false;
-        // const {data:res} = this.$axios.post("login_user/",this.userForm)//请求地址和参数
-        // if(res.status!==200) return this.$message.error("登陆失败")
-        // this.$message.success("登录成功")
+        const {data:res} = this.$axios.post("login_user/",this.userForm)//请求地址和参数
+        if(res.status!==200) return this.$message.error("登陆失败")
+        this.$message.success("登录成功")
+        this.$store.commit('loginUser',this.userForm)
         this.$router.push("/userHome")
       })
     },
@@ -213,9 +214,10 @@ export default {
     loginRider() {
       this.$refs.riderRef.validate((valid)=>{
         if(!valid) return false
-        // const {data:res} = this.$axios.post("login_rider/",this.riderForm)
-        // if(res.status!== 200) return this.$message.error("登陆失败")
-        // this.$message.success("登录成功")
+        const {data:res} = this.$axios.post("login_rider/",this.riderForm)
+        if(res.status!== 200) return this.$message.error("登陆失败")
+        this.$message.success("登录成功")
+        this.$store.commit('loginRider',this.riderForm)
         this.$router.push("/riderHome")
       })
 
@@ -226,9 +228,10 @@ export default {
     loginPlat() {
       this.$refs.platRef.validate((valid)=>{
         if(!valid) return false
-        // const {data:res} = this.$axios.post("login_plat/",this.platForm)
-        // if(res.status!== 200) return this.$message.error("登陆失败")
-        // this.$message.success("登录成功")
+        const {data:res} = this.$axios.post("login_plat/",this.platForm)
+        if(res.status!== 200) return this.$message.error("登陆失败")
+        this.$message.success("登录成功")
+        this.$store.commit('loginPlat',this.platForm)
         this.$router.push("/platHome");
       })
     },
@@ -238,9 +241,10 @@ export default {
     loginShop() {
       this.$refs.shopRef.validate((valid)=>{
         if(!valid) return false
-        // const {data:res} = this.$axios.post("login_shop/",this.shopForm)
-        // if(res.status!== 200) return this.$message.error("登陆失败")
-        // this.$message.success("登录成功")
+        const {data:res} = this.$axios.post("login_shop/",this.shopForm)
+        if(res.status!== 200) return this.$message.error("登陆失败")
+        this.$message.success("登录成功")
+        this.$store.commit('loginShop',this.shopForm)
         this.$router.push("/shopHome");
       })
     },

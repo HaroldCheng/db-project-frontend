@@ -1,30 +1,36 @@
 <template>
 <el-container class="userHomeContainer">
   <el-header>
-    <div>
       <span>多平台外卖系统</span>
-    </div>
-    <el-button class="logout_button" type="info" @click="logout">退出</el-button>
+    <el-button plain @click="logout">退出</el-button>
   </el-header>
-  <el-container class="aside_main">
-      <el-aside width="300px">
-          <el-menu class="aside_menu"
-                   background-color="lightskyblue"
+  <el-container>
+      <el-aside>
+          <el-menu
+              background-color="lightskyblue"
                    text-color="#fff"
                    active-text-color="black"
                    :router="true"
                    :default-active="activePath">
               <el-menu-item index="shopInfo" class="aside_menu1" @click="saveNavState('shopInfo')">
+                  <i class="el-icon-s-shop"></i>
                   <span>店铺基本信息</span>
               </el-menu-item>
               <el-menu-item index="shopDish" class="aside_menu2" @click="saveNavState('shopDish')">
-                  <span>店铺菜品</span>
+                <i class="el-icon-dish"></i>
+                <span>店铺菜品</span>
               </el-menu-item>
-              <el-menu-item index="shopOrder" class="aside_menu3" @click="saveNavState('shopOrder')">
-                  <span>订单记录</span>
+            <el-menu-item index="shopOrder" class="aside_menu2" @click="saveNavState('shopDish')">
+              <i class="el-icon-s-order"></i>
+              <span>当前订单</span>
+            </el-menu-item>
+              <el-menu-item index="shopHistory" class="aside_menu3" @click="saveNavState('shopOrder')">
+                  <i class="el-icon-time"></i>
+                <span>订单记录</span>
               </el-menu-item>
               <el-menu-item index="shopIncome" class="aside_menu4" @click="saveNavState('shopIncome')">
-                  <span>收益情况</span>
+                <i class="el-icon-s-finance"></i>
+                <span>收益情况</span>
               </el-menu-item>
           </el-menu>
           <div class="author">
@@ -35,17 +41,30 @@
           </div>
       </el-aside>
     <el-main>
-        <router-view></router-view>
+        <router-view :shopId="shopLoginForm.id"></router-view>
     </el-main>
   </el-container>
 </el-container>
 </template>
 
 <script>
+import ShopOrder from "@/components/Shop/ShopOrder"
+import ShopDish from "@/components/Shop/ShopDish"
+import ShopInfo from "@/components/Shop/ShopInfo"
+import ShopIncome from "@/components/Shop/ShopIncome"
 export default {
+  components:{
+    ShopOrder,
+    ShopInfo,
+    ShopIncome,
+    ShopDish
+  },
   data(){
     return{
-      msg:'',
+      shopLoginForm:{
+        id:12,
+        password:''
+      }
     }
   },
   methods:{

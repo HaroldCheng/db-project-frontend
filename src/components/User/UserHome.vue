@@ -1,7 +1,7 @@
 <template>
   <el-container>
     <el-header>
-      <span>同福多平台外卖系统</span>
+      <span>多平台外卖系统</span>
       <el-button plain @click="logout">退出</el-button>
     </el-header>
     <el-container>
@@ -38,20 +38,42 @@
         </div>
       </el-aside>
       <el-main>
-        <router-view></router-view>
+        <router-view :userId="userLoginForm.id"></router-view>
       </el-main>
     </el-container>
   </el-container>
 </template>
 
 <script>
+import UserInfo from "@/components/User/UserInfo"
+import PlatChoose from "@/components/User/PlatChoose"
+import Order from "@/components/User/Order"
+import OrderMT from "@/components/User/OrderMT"
+import Dish from "@/components/User/Dish"
+import History from "@/components/User/History"
+import Money from "@/components/User/Money"
+
 export default {
+  components:{
+    UserInfo,
+    PlatChoose,
+    OrderMT,
+    Order,
+    Dish,
+    History,
+    Money
+  },
   data() {
     return{
+      userLoginForm:{
+        id:12,
+        password:''
+      },
       activePath:''
     }
   },
   created () {
+    this.userLoginForm = this.$store.state.userLoginForm
     this.activePath = window.sessionStorage.getItem('activePath')
   },
   methods: {

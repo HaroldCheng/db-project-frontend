@@ -8,17 +8,15 @@
         </div>
         <div class="infoTable">
             <el-card>
-                <el-table>
-                    <el-table-column label="用户编号" width="150px"> </el-table-column>
-                    <el-table-column label="用户姓名" width="150px"> </el-table-column>
-                    <el-table-column label="用户电话" width="150px"> </el-table-column>
-                    <el-table-column label="用户性别" width="150px"> </el-table-column>
-                    <el-table-column label="用户地址" width="150px"> </el-table-column>
-                    <el-table-column label="用户本季度消费" width="150px"> </el-table-column>
+                <el-table :data="userList">
+                    <el-table-column label="用户编号" prop="id" width="150px"> </el-table-column>
+                    <el-table-column label="用户姓名" prop="name" width="150px"> </el-table-column>
+                    <el-table-column label="用户电话" prop="tel" width="150px"> </el-table-column>
+                    <el-table-column label="用户性别" prop="gender" width="150px"> </el-table-column>
+                    <el-table-column label="用户地址" prop="address" width="150px"> </el-table-column>
+                    <el-table-column label="用户本季度消费" prop="custom" width="150px"> </el-table-column>
                 </el-table>
-                <el-button type="primary" class="button">拉黑用户</el-button>
             </el-card>
-
         </div>
     </div>
 </template>
@@ -27,19 +25,37 @@
 export default {
   data() {
     return {
-      userName: "vthsll",
-    };
+      platId:1,
+      userList:[
+        {
+          id:1,
+          name:'',
+          tel:'',
+          gender:'',
+          address:'',
+          custom:12
+        }
+      ]
+    }
+  },
+  created() {
+    // this.getUserList()
+  },
+  methods:{
+    async getUserList(){
+      const {data:res} = await this.$axios.post('plat/user_list/',[this.platId])
+      if(res.status !== 200) return this.$message.error("获取用户列表失败！")
+      this.$message.success("获取用户列表成功！")
+      this.userList = res.data.user_list
+    }
   }
-};
+}
 </script>
 
 <style lang="less" scoped>
     .myInfo {
         margin-top: 40px;
         margin-left: 80px;
-    }
-    .button {
-        margin-top: 40px;
     }
     .infoTable {
         margin-left: 40px;

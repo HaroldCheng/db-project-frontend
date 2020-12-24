@@ -72,6 +72,9 @@ export default {
     }
   },
   created() {
+    this.platId = this.$store.state.userChooseDishInfo.platId
+    this.userId = this.$store.state.userChooseDishInfo.userId
+    this.shopId = this.$store.state.userChooseDishInfo.shopId
     this.getDishList()
   },
   methods:{

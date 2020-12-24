@@ -1,26 +1,16 @@
 <template>
 <el-container class="userHomeContainer">
   <el-header>
-    <div>
       <span>多平台外卖系统</span>
-    </div>
-    <el-button class="logout_button" type="info" @click="logout">退出</el-button>
+    <el-button plain @click="logout">退出</el-button>
   </el-header>
-  <el-container class="aside_main">
-      <el-aside width="300px">
-          <el-menu unique-opened :collapse="isCollapse" :collapse-transition="false" router :default-active="activePath" background-color="#87cefa" text-color="#fff" active-text-color="black">
-              <el-submenu :index="item.id+''" v-for="item in menuList" :key="item.id">
-                  <template slot="title">
-                      <i :class="iconObj[item.id]"></i>
-                      <span>{{ item.authName}}</span>
-                  </template>
-                  <el-menu-item :index="'/' + subItem.path" v-for="subItem in item.children" :key="subItem.id" @click="saveNavState('/' + subItem.path)">
-                      <template slot="title">
-                          <i class="el-icon-menu"></i>
-                          <span>{{ subItem.authName}}</span>
-                      </template>
-                  </el-menu-item>
-              </el-submenu>
+  <el-container>
+      <el-aside>
+          <el-menu           background-color="#87cefa"
+                             text-color="white"
+                             active-text-color="black"
+                             :router="true"
+                             :default-active="activePath">
               <el-menu-item class="infoMenu" index="riderInfo" @click="saveNavState('riderInfo')">
                   <i class="el-icon-user-solid"></i>
                   <span class="info">骑手基本信息</span>
@@ -59,10 +49,16 @@ export default {
       msg:'',
     }
   },
+  created () {
+    this.activePath = window.sessionStorage.getItem('activePath')
+  },
   methods:{
     logout(){
       window.sessionStorage.clear();
       this.$router.push('/login');
+    },
+    saveNavState(activePath) {
+      window.sessionStorage.setItem('activePath',activePath)
     }
   }
 };
