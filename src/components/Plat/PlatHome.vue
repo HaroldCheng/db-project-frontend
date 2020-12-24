@@ -42,20 +42,37 @@
           </div>
       </el-aside>
     <el-main>
-        <router-view></router-view>
+        <router-view :platId="platLoginForm.id"></router-view>
     </el-main>
   </el-container>
 </el-container>
 </template>
 
 <script>
+import PlatInfo from "@/components/Plat/PlatInfo"
+import PlatRider from "@/components/Plat/PlatRider"
+import PlatShop from "@/components/Plat/PlatShop"
+import PlatUser from "@/components/Plat/PlatUser"
+import PlatIncome from "@/components/Plat/PlatIncome"
+
 export default {
+  components:{
+    PlatIncome,
+    PlatUser,
+    PlatShop,
+    PlatRider,
+    PlatInfo
+  },
   data(){
     return{
-      msg:'',
+      platLoginForm:{
+        id:12,
+        password:''
+      }
     }
   },
   created () {
+    this.platLoginForm = this.$store.state.platLoginForm
     this.activePath = window.sessionStorage.getItem('activePath')
   },
   methods:{

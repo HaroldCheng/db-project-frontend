@@ -18,18 +18,14 @@
 <script>
 let echarts = require('echarts')
     export default {
+  props:['riderId'],
       data(){
         return{
-          riderId:3,
-          perfInfo:[
-            {
-              name:'',
-              value:12
-            },
-            {
-              name:'',
-              value:124
-            }
+          platBelongs:[
+
+          ],
+          platIncome:[
+
           ]
         }
       },
@@ -43,14 +39,21 @@ let echarts = require('echarts')
         const {data:res} = await this.$axios.post('rider/perf_info/',[this.riderId])
         if(res.status !== 200) return this.$message.error("获取业绩信息失败!")
         this.$message.success("获取消费信息成功!")
-        this.perfInfo = res.data.perf_info
+        //TODO: api updates, notice the map relation
+        this.platBelongs = res.data.plat_belongs
+        this.platIncome = res.data.plat_income
         const option = {
           title:{
-            text:'各平台营收情况'
+            text:'在各平台营收情况'
           },
+          xAxis:{
+            data:this.platBelongs
+          },
+          yAxis:{},
           series:{
+            name:'收入',
             type:'bar',
-            data:this.perfInfo
+            data:this.platIncome
           }
         }
         myChart.setOption(option)

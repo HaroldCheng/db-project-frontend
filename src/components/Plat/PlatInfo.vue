@@ -78,12 +78,9 @@
 
 <script>
 export default {
+  props:['platId'],
   data() {
     return {
-      platLoginInfo:{
-        id:3,
-        password:'sd'
-      },
       platInfo:{
         id:1,
         name:'mt',
@@ -107,12 +104,11 @@ export default {
     }
   },
   created() {
-    console.log("Here")
-    // this.getPlatInfo()
+    this.getPlatInfo()
   },
   methods:{
     async getPlatInfo(){
-      const {data:res} = await this.$axios.post('plat/plat_info/',this.platId)
+      const {data:res} = await this.$axios.post('plat/plat_info/',[this.platId])
       if(res.status !== 200) return this.$message.error("获取平台信息错误")
       this.$message.success("获取平台信息成功")
       this.platInfo = res.data.plat_info

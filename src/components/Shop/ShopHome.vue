@@ -52,12 +52,15 @@ import ShopOrder from "@/components/Shop/ShopOrder"
 import ShopDish from "@/components/Shop/ShopDish"
 import ShopInfo from "@/components/Shop/ShopInfo"
 import ShopIncome from "@/components/Shop/ShopIncome"
+import ShopHistory from "@/components/Shop/ShopHistory"
+
 export default {
   components:{
     ShopOrder,
     ShopInfo,
     ShopIncome,
-    ShopDish
+    ShopDish,
+    ShopHistory
   },
   data(){
     return{
@@ -69,14 +72,18 @@ export default {
   },
   created() {
     this.shopLoginForm = this.$store.state.shopLoginForm
+    this.activePath = window.sessionStorage.getItem('activePath')
   },
   methods:{
     logout(){
       window.sessionStorage.clear();
       this.$router.push('/login');
+    },
+    saveNavState(activePath) {
+      window.sessionStorage.setItem('activePath',activePath)
     }
   }
-};
+}
 </script>
 
 <style lang="less" scoped>

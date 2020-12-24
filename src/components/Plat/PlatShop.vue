@@ -45,9 +45,9 @@
 
 <script>
 export default {
+  props:['platId'],
   data() {
     return {
-      platId:2,
       shopList:[
         {
           id:1,

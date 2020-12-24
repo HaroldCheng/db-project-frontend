@@ -23,9 +23,9 @@
 
 <script>
 export default {
+  props:['platId'],
   data() {
     return {
-      platId:1,
       userList:[
         {
           id:1,
@@ -39,7 +39,7 @@ export default {
     }
   },
   created() {
-    // this.getUserList()
+    this.getUserList()
   },
   methods:{
     async getUserList(){

@@ -71,12 +71,9 @@
 
 <script>
 export default {
+  props:['riderId'],
   data() {
     return {
-      riderLoginInfo:{
-        id:5,
-        password:'sjknb'
-      },
       riderInfo:{
         id:1,
         name:'zhlsb',
@@ -91,9 +88,6 @@ export default {
         gender:'',
         age:12,
         tel:12
-      },
-      modifyFormRules:{ //TODO: sub important
-        
       }
     }
   },
@@ -102,7 +96,7 @@ export default {
   },
   methods:{
     async getRiderInfo(){
-      const {data:res} = await this.$axios.post('rider/get_info/', this.riderLoginInfo)
+      const {data:res} = await this.$axios.post('rider/get_info/', [this.riderId])
       if (res.status !== 200) {
         return this.$message.error("获取用户信息失败！")
       }

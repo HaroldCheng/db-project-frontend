@@ -108,7 +108,7 @@ export default {
   },
   methods:{
     async getShopInfo(){
-      const {data:res} = await this.$axios.post('shop/get_info/', [shopId])
+      const {data:res} = await this.$axios.post('shop/get_info/', [this.shopId])
       if (res.status !== 200) {
         return this.$message.error("获取店铺信息失败！")
       }

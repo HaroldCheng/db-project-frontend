@@ -42,7 +42,7 @@
       },
       methods: {
         async getOrderList(){
-          const {data:res} = await this.$axios.post('shop/order_list/',[shopId])
+          const {data:res} = await this.$axios.post('shop/order_list/',[this.shopId])
           if(res.status !== 200) return this.$message.error("刷新失败！")
           this.$message.success("获取成功")
           this.orderList = res.data.order_list

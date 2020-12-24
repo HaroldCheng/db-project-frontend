@@ -58,7 +58,10 @@ export default {
   data(){
     return{
       riderLoginForm:{
-      }
+        id:12,
+        password:''
+      },
+      activePath:''
     }
   },
   created () {

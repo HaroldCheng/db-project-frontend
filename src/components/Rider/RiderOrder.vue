@@ -34,10 +34,9 @@
 
 <script>
 export default {
+  props:['riderId'],
   data(){
     return{
-      platId:1,
-      riderId:5,
         orderSet:[
           {
             id:1,

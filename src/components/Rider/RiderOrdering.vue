@@ -32,9 +32,9 @@
 
 <script>
 export default {
+  props:['riderId'],
   data(){
     return{
-      riderId:3,
         orderingSet:[
           {
             id:1,
