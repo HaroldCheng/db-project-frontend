@@ -6,7 +6,8 @@
           >用户主页</el-breadcrumb-item
           >
           <el-breadcrumb-item :to="{path:'/platChoose'}">选择平台</el-breadcrumb-item>
-          <el-breadcrumb-item :to="{path:'/order'}">商铺列表</el-breadcrumb-item>
+          <el-breadcrumb-item :to="{path:'/order'}" v-if="platId==2">商铺列表</el-breadcrumb-item>
+          <el-breadcrumb-item :to="{path:'/orderMT'}" v-if="platId==1">商铺列表</el-breadcrumb-item>
         <el-breadcrumb-item>商家菜品</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
@@ -33,16 +34,6 @@
         </p>
       </el-card>
     </div>
-<!--    <div class="orderList">-->
-<!--      <el-card>-->
-<!--        <h2>订单内容</h2>-->
-<!--        <el-table :data="orderList">-->
-<!--          <el-table-column label="菜品名称" prop="name"></el-table-column>-->
-<!--          <el-table-column label="菜品数量" prop="number"></el-table-column>-->
-<!--        </el-table>-->
-<!--        <h2>{{totalCost}}</h2>-->
-<!--      </el-card>-->
-<!--    </div>-->
   </div>
 </template>
 

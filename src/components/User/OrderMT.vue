@@ -58,7 +58,11 @@ export default {
   },
   methods:{
     chooseDish(shopID) {
-      this.$store.commit('userChooseShop',this.platId,shopID)
+      const ids={
+        platId: this.platId,
+        shopId:shopID
+      }
+      this.$store.commit('userChooseShop',ids)
       this.$router.push("/dish")
     },
     async regVIP(shopId) {

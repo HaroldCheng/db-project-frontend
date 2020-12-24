@@ -59,12 +59,16 @@ export default {
   },
   methods:{
     chooseDish(shopID) {
-      this.$store.commit('userChooseShop',this.platId,shopID)
+      const ids={
+        platId:this.platId,
+        shopId:shopID
+      }
+      this.$store.commit('userChooseShop',ids)
       this.$router.push("/dish")
     },
     regVIP:async function(p) {
       this.shopList[p].vip = true
-      const {data:res} = await this.$axios.post('client/vip_list/',[p,this.userId])
+      const {data:res} = await this.$axios.post('client/vip_list/',[this.shopList[p].id,this.userId])
       if (res.status !== 200){
         return this.$message.error("注册失败！")
       }
