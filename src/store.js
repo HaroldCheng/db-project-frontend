@@ -39,9 +39,8 @@ export default new Vuex.Store({
         loginShop(state,form){
             state.shopLoginForm = form
         },
-        userChooseShop(state,pid,sid){
-            state.userChooseShopInfo.platId = pid
-            state.userChooseShopInfo.shopId = sid
+        userChooseShop(state,ids){
+            state.userChooseShopInfo=ids
         }
     },
     actions:{

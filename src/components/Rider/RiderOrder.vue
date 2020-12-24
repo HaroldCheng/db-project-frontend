@@ -12,7 +12,7 @@
           <el-card>
               <el-table :data="orderSet">
                   <el-table-column label="#" prop="id" width="80px"> </el-table-column>
-                <el-table-column label="客户姓名" prop="userName" width="150px"></el-table-column>
+                <el-table-column label="客户姓名" prop="userName" width="100px"></el-table-column>
                   <el-table-column label="客户地址" prop="userAddr" width="150px"> </el-table-column>
                   <el-table-column label="客户电话" prop="userTel" width="150px"> </el-table-column>
                 <el-table-column label="商家姓名" prop="shopName" width="100px"></el-table-column>
@@ -60,7 +60,7 @@ export default {
     this.$router.push('/riderHome')
   },
   pickOrder:async function(index) {
-    const {data:res} = await this.$axios.post('rider/pick_order/',[index])
+    const {data:res} = await this.$axios.post('rider/pick_order/',[this.orderSet[index].id,this.riderId])
     if(res.status !== 200) {
       return this.$message.error("接单失败!")
     }
@@ -83,6 +83,6 @@ export default {
 .historyTable {
     margin-left: 40px;
   margin-top: 40px;
-  width: 80%;
+  width: 90%;
 }
 </style>

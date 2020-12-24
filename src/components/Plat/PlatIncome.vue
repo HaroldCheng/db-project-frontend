@@ -53,6 +53,10 @@ methods:{
         name:'营收',
         type:'line',
         data:this.incomeValue
+      },
+      tooltip:{
+        trigger:'axis',
+        triggerOn:'mousemove'
       }
     }
     myChart.setOption(option)

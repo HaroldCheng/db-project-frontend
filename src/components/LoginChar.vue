@@ -21,7 +21,7 @@
         >
           <el-form-item prop="id">
             <el-input
-              placeholder="用户名"
+              placeholder="用户编号"
               prefix-icon="el-icon-user"
               v-model="userForm.id"
             ></el-input>
@@ -58,7 +58,7 @@
         >
           <el-form-item prop="id">
             <el-input
-              placeholder="用户名"
+              placeholder="用户编号"
               prefix-icon="el-icon-user"
               v-model="riderForm.id"
             ></el-input>
@@ -95,7 +95,7 @@
         >
           <el-form-item prop="id">
             <el-input
-              placeholder="用户名"
+              placeholder="用户编号"
               prefix-icon="el-icon-user"
               v-model="platForm.id"
             ></el-input>
@@ -132,7 +132,7 @@
         >
           <el-form-item prop="id">
             <el-input
-              placeholder="用户名"
+              placeholder="用户编号"
               prefix-icon="el-icon-user"
               v-model="shopForm.id"
             ></el-input>
@@ -177,7 +177,7 @@ export default {
       },
       loginRules: {
         id: [
-          { required: true, message: "请输入用户名", trigger: "blur" },
+          { required: true, message: "请输入用户编号", trigger: "blur" },
           {
             min: 1,
             max: 10,
